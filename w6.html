@@ -1,0 +1,143 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWD</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">我的網站</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首頁</a></li>
+                <li class="nav-item"><a class="nav-link" href="w6.html">關於</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">服務</a></li>
+                <li class="nav-item"><a class="nav-link" href="w6hw.html">聯絡</a></li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+<section class="container my-5">
+  <div class="row text-center justify-content-center">
+
+    <!-- 介紹一 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">介紹一</h5>
+          <p class="card-text">長夜月搖</p>
+          <img src="83ea016dc8f54ee7b8c97d10f20aa5e8.gif" alt="長夜月搖" class="img-fluid rounded"><br>
+          <button type="button" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            介紹一
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 介紹二 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">介紹二</h5>
+          <p class="card-text">Oiiai Cat</p>
+          <img src="207945a91631432faf33762ce56672c2.gif" alt="oiiai cat" class="img-fluid rounded"><br>
+          <button type="button" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+            介紹二
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 介紹三 -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">介紹三</h5>
+          <p class="card-text">踩奶貓貓</p>
+          <img src="540cb306b76245079ae6cf3e8d931227.gif" alt="踩奶貓貓" class="img-fluid rounded"><br>
+          <button type="button" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+            介紹三
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">介紹一</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1 class="h5">
+          是一名來自遊戲《崩壞：星穹鐵道》的角色，因角色設定是面無表情卻做出這種動作導致爆紅。
+        </h1>
+        <a href="https://www.youtube.com/watch?v=aqJYpWOAEus" target="_blank" class="btn btn-link">影片觀賞</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">介紹二</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1 class="h5">
+          「Oiiai cat」是一個爆紅的迷因，主角是一隻名叫 Ethel 的特殊貓咪，牠因為「嗚咿咿啊咿」的魔性配音和旋轉的畫面而廣受歡迎。
+          這段聲音來自一名土耳其小孩翻唱遊戲《Friday Night Funkin'》風格的歌曲，經由 TikTok 傳播而走紅。
+        </h1>
+        <a href="https://www.youtube.com/watch?v=IxX_QHay02M" target="_blank" class="btn btn-link">影片觀賞</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel3">介紹三</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1 class="h5">
+          踩奶貓貓原名FiFi，因為FiFi踩奶動作很像急得跺腳因此被用於扮演各種焦急的角色。
+        </h1>
+        <a href="https://youtube.com/shorts/28GnJC1ssM8?si=hhQKlg-zg5O7ggT0" target="_blank" class="btn btn-link">影片觀賞</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</html>
