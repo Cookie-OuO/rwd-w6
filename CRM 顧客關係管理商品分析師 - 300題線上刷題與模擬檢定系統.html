@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM 顧客關係管理商品分析師 - 300題線上刷題與模擬檢定系統</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-800/80 backdrop-blur-md border-b border-slate-700/60 sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="app.showHome()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <i class="fa-solid fa-chart-line text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg text-white leading-tight">CRM 顧客關係管理分析師</h1>
+                    <p class="text-xs text-slate-400">認證檢定 300 題完整題庫系統</p>
+                </div>
+            </div>
+
+            <!-- Stats Quick View (Desktop) -->
+            <div class="hidden md:flex items-center gap-6 text-sm">
+                <div class="flex items-center gap-2 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-700/50">
+                    <i class="fa-solid fa-[#f59e0b] fa-star text-amber-400"></i>
+                    <span class="text-slate-400">收藏:</span>
+                    <span id="header-fav-count" class="font-semibold text-amber-400">0</span>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-700/50">
+                    <i class="fa-solid fa-circle-xmark text-rose-400"></i>
+                    <span class="text-slate-400">錯題:</span>
+                    <span id="header-wrong-count" class="font-semibold text-rose-400">0</span>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-700/50">
+                    <i class="fa-solid fa-trophy text-emerald-400"></i>
+                    <span class="text-slate-400">最高分:</span>
+                    <span id="header-high-score" class="font-semibold text-emerald-400">--</span>
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="app.showHome()" class="px-3 py-1.5 rounded-lg bg-slate-700/50 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">主選單</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= VIEW: HOME / DASHBOARD ================= -->
+        <section id="view-home" class="space-y-8 animate-fade-in">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/80 via-indigo-900/60 to-slate-800 border border-slate-700/80 p-6 sm:p-8 shadow-2xl">
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                        <i class="fa-solid fa-shield-halved"></i> 微析科技官方認證檢定標準題庫
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        精準刷題 · 突破 70 分及格線
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        本系統收錄完整 300 道單選題，全面支援順序練習、模擬檢定、錯題專攻與重點收藏。隨時隨地開啟手機與電腦多端備考。
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="app.startSequentialMode()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm shadow-lg shadow-blue-600/30 transition flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> 開始順序刷題 (1~300)
+                        </button>
+                        <button onclick="app.startExamMode()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
+                            <i class="fa-solid fa-stopwatch"></i> 開始模擬檢定 (50題/60分)
+                        </button>
+                    </div>
+                </div>
+                <!-- Background Graphic -->
+                <div class="absolute -right-10 -bottom-10 opacity-15 text-white pointer-events-none hidden md:block">
+                    <i class="fa-solid fa-graduation-cap text-[240px]"></i>
+                </div>
+            </div>
+
+            <!-- Quick Navigation Mode Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Card 1: 順序刷題 -->
+                <div onclick="app.startSequentialMode()" class="group relative bg-slate-800/80 hover:bg-slate-800 rounded-xl p-5 border border-slate-700/60 hover:border-blue-500/50 transition duration-200 cursor-pointer shadow-lg">
+                    <div class="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition duration-200">
+                        <i class="fa-solid fa-list-ol"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-1">順序練習模式</h3>
+                    <p class="text-xs text-slate-400 mb-4">按 1 ~ 300 題完整演練，可自訂即時解答與詳細解析。</p>
+                    <div class="flex items-center justify-between text-xs text-blue-400 font-medium">
+                        <span>目前進度: <span id="home-seq-progress">0</span> / 300</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2: 模擬檢定 -->
+                <div onclick="app.startExamMode()" class="group relative bg-slate-800/80 hover:bg-slate-800 rounded-xl p-5 border border-slate-700/60 hover:border-emerald-500/50 transition duration-200 cursor-pointer shadow-lg">
+                    <div class="w-12 h-12 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition duration-200">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-1">模擬檢定模式</h3>
+                    <p class="text-xs text-slate-400 mb-4">隨機抽 50 題，60 分鐘限時倒數，總分 70 分及格。</p>
+                    <div class="flex items-center justify-between text-xs text-emerald-400 font-medium">
+                        <span>歷史最高分: <span id="home-high-score-text">無紀錄</span></span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3: 錯題複習 -->
+                <div onclick="app.startWrongMode()" class="group relative bg-slate-800/80 hover:bg-slate-800 rounded-xl p-5 border border-slate-700/60 hover:border-rose-500/50 transition duration-200 cursor-pointer shadow-lg">
+                    <div class="w-12 h-12 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition duration-200">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-1">錯題重練本</h3>
+                    <p class="text-xs text-slate-400 mb-4">自動紀錄答錯題目，重點重複複習加強弱點記憶。</p>
+                    <div class="flex items-center justify-between text-xs text-rose-400 font-medium">
+                        <span>待複習錯題: <span id="home-wrong-count-text">0 題</span></span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4: 收藏本 -->
+                <div onclick="app.startBookmarkMode()" class="group relative bg-slate-800/80 hover:bg-slate-800 rounded-xl p-5 border border-slate-700/60 hover:border-amber-500/50 transition duration-200 cursor-pointer shadow-lg">
+                    <div class="w-12 h-12 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition duration-200">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-1">收藏難題庫</h3>
+                    <p class="text-xs text-slate-400 mb-4">自訂星號標記難題與重點觀念，集中抽查研讀。</p>
+                    <div class="flex items-center justify-between text-xs text-amber-400 font-medium">
+                        <span>已標記收藏: <span id="home-fav-count-text">0 題</span></span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Info & Shortcut Guide -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Exam Standards Rule -->
+                <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/50 space-y-3">
+                    <div class="flex items-center gap-2 text-blue-400 font-semibold text-sm">
+                        <i class="fa-solid fa-circle-info"></i> CRM 分析師檢定規範
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside leading-relaxed">
+                        <li>每次考測檢定隨機抽取 50 題單選題。</li>
+                        <li>答對每題 2 分，總滿分 100 分。</li>
+                        <li>總積分達 <strong>70 分 (答對35題)</strong> 以上方算及格。</li>
+                        <li>正式檢定考試時間限制為 60 分鐘。</li>
+                    </ul>
+                </div>
+
+                <!-- Keyboard Navigation Tip -->
+                <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/50 space-y-3">
+                    <div class="flex items-center gap-2 text-indigo-400 font-semibold text-sm">
+                        <i class="fa-solid fa-keyboard"></i> 鍵盤快捷鍵指南
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/40 text-slate-300 flex items-center justify-between">
+                            <span>選項 (A,B,C,D)</span>
+                            <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-600 rounded text-[10px] text-indigo-300">A - D</kbd>
+                        </div>
+                        <div class="bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/40 text-slate-300 flex items-center justify-between">
+                            <span>切換題號</span>
+                            <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-600 rounded text-[10px] text-indigo-300">← / →</kbd>
+                        </div>
+                        <div class="bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/40 text-slate-300 flex items-center justify-between">
+                            <span>標記收藏</span>
+                            <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-600 rounded text-[10px] text-indigo-300">S</kbd>
+                        </div>
+                        <div class="bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/40 text-slate-300 flex items-center justify-between">
+                            <span>顯示/隱藏解答</span>
+                            <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-600 rounded text-[10px] text-indigo-300">Space</kbd>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Management & Reset Data -->
+                <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/50 flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 text-rose-400 font-semibold text-sm">
+                            <i class="fa-solid fa-database"></i> 刷題紀錄管理
+                        </div>
+                        <p class="text-xs text-slate-400">系統自動儲存練習進度於瀏覽器。若需重新開始學習，可重置歷程紀錄。</p>
+                    </div>
+                    <button onclick="app.confirmResetData()" class="mt-4 px-4 py-2 rounded-lg border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-medium transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-trash-can"></i> 清除歷史紀錄與答題統計
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW: QUIZ / EXAM INTERFACE ================= -->
+        <section id="view-quiz" class="hidden space-y-6">
+            <!-- Top Control Bar -->
+            <div class="bg-slate-800/90 rounded-2xl p-4 border border-slate-700/60 shadow-xl flex flex-wrap items-center justify-between gap-4">
+                <!-- Mode & Progress Text -->
+                <div class="flex items-center gap-3">
+                    <span id="quiz-mode-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                        順序刷題
+                    </span>
+                    <div class="text-sm font-semibold text-white">
+                        第 <span id="quiz-current-num" class="text-blue-400 text-lg">1</span> / <span id="quiz-total-num">300</span> 題
+                    </div>
+                </div>
+
+                <!-- Middle: Exam Timer (Shown only in exam mode) -->
+                <div id="quiz-timer-container" class="hidden flex items-center gap-2 px-4 py-1.5 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-400 font-mono font-bold text-base shadow-inner">
+                    <i class="fa-regular fa-clock animate-pulse"></i>
+                    <span id="quiz-timer-display">60:00</span>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-2">
+                    <!-- Practice Toggle Instant Answer -->
+                    <button id="btn-toggle-instant" onclick="app.toggleInstantAnswer()" class="px-3 py-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-xs font-medium text-slate-200 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-eye"></i>
+                        <span id="instant-answer-status">即時解析: 開啟</span>
+                    </button>
+
+                    <!-- Star Favorite Button -->
+                    <button id="btn-bookmark-current" onclick="app.toggleBookmarkCurrent()" class="px-3 py-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-xs font-medium text-amber-400 transition flex items-center gap-1.5">
+                        <i id="bookmark-star-icon" class="fa-regular fa-star"></i>
+                        <span class="hidden sm:inline">收藏</span>
+                    </button>
+
+                    <!-- Question Grid Matrix Modal Trigger -->
+                    <button onclick="app.openQuestionMatrix()" class="px-3 py-1.5 rounded-lg bg-indigo-600/80 hover:bg-indigo-600 text-xs font-medium text-white transition flex items-center gap-1.5 shadow-md">
+                        <i class="fa-solid fa-table-cells"></i>
+                        <span>答題卡</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Global Progress Bar -->
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700/40">
+                <div id="quiz-progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Main Question Card -->
+            <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700/70 shadow-2xl space-y-6">
+                <!-- Question Title & ID -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span id="question-id-tag" class="font-mono bg-slate-900/60 px-2.5 py-1 rounded border border-slate-700">題號 #1</span>
+                        <span id="question-answered-status" class="text-slate-400">未作答</span>
+                    </div>
+                    <h3 id="question-text" class="text-lg sm:text-xl font-bold text-white leading-relaxed tracking-wide">
+                        題目讀取中...
+                    </h3>
+                </div>
+
+                <!-- Options List -->
+                <div id="options-container" class="space-y-3 pt-2">
+                    <!-- Options injected via JavaScript -->
+                </div>
+
+                <!-- Instant Explanation / Answer Reveal Box -->
+                <div id="explanation-box" class="hidden rounded-xl bg-slate-900/90 border border-blue-500/30 p-5 space-y-3 animate-fade-in">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <div class="flex items-center gap-2 font-bold text-sm text-emerald-400">
+                            <i class="fa-solid fa-circle-check"></i> 標準答案: <span id="correct-answer-text" class="text-lg text-white">--</span>
+                        </div>
+                        <span class="text-xs text-slate-400">考點解析</span>
+                    </div>
+                    <p id="explanation-detail-text" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        本題標準解答為該選項。微析科技 CRM 認證考題著重顧客體驗、經營績效數據與標準作業流程之觀念運用。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation Controls -->
+            <div class="flex items-center justify-between gap-4 pt-2">
+                <button onclick="app.prevQuestion()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm border border-slate-700/60 transition flex items-center gap-2">
+                    <i class="fa-solid fa-chevron-left"></i> 上一題
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <!-- Toggle Explanation button for review mode -->
+                    <button id="btn-toggle-reveal" onclick="app.toggleRevealAnswerManual()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm border border-slate-700 transition flex items-center gap-2">
+                        <i class="fa-solid fa-key"></i> <span class="hidden sm:inline">答案</span>
+                    </button>
+
+                    <!-- Submit Exam / Complete Practice -->
+                    <button id="btn-submit-exam" onclick="app.confirmSubmitExam()" class="hidden px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> 交卷結算
+                    </button>
+
+                    <button id="btn-next-q" onclick="app.nextQuestion()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 transition flex items-center gap-2">
+                        下一題 <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW: EXAM RESULT / SCORECARD ================= -->
+        <section id="view-result" class="hidden space-y-8 animate-fade-in">
+            <!-- Score Card Hero -->
+            <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-10 border border-slate-700/80 shadow-2xl text-center relative overflow-hidden space-y-6">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-slate-900 border border-slate-700">
+                    <span id="result-mode-title" class="text-slate-300">模擬檢定成績單</span>
+                </div>
+
+                <!-- Main Score Circle / Number -->
+                <div class="py-2 flex flex-col items-center justify-center">
+                    <div class="text-6xl sm:text-8xl font-black tracking-tight text-white flex items-baseline justify-center gap-1">
+                        <span id="result-score-val">0</span>
+                        <span class="text-2xl sm:text-3xl font-medium text-slate-400">/ 100 分</span>
+                    </div>
+
+                    <!-- Pass / Fail Stamp -->
+                    <div id="result-stamp" class="mt-4 px-6 py-2 rounded-xl text-lg font-extrabold uppercase tracking-widest inline-flex items-center gap-2 border-2">
+                        <i id="result-stamp-icon" class="fa-solid"></i>
+                        <span id="result-stamp-text">計算中</span>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-4 border-t border-slate-700/60">
+                    <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-700/40">
+                        <div class="text-xs text-slate-400">答對題數</div>
+                        <div id="result-correct-count" class="text-xl font-bold text-emerald-400 mt-1">0 題</div>
+                    </div>
+                    <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-700/40">
+                        <div class="text-xs text-slate-400">答錯題數</div>
+                        <div id="result-wrong-count" class="text-xl font-bold text-rose-400 mt-1">0 題</div>
+                    </div>
+                    <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-700/40">
+                        <div class="text-xs text-slate-400">答對率</div>
+                        <div id="result-accuracy" class="text-xl font-bold text-blue-400 mt-1">0%</div>
+                    </div>
+                    <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-700/40">
+                        <div class="text-xs text-slate-400">測驗耗時</div>
+                        <div id="result-time-spent" class="text-xl font-bold text-amber-400 mt-1">00:00</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-4 flex flex-wrap justify-center gap-4">
+                    <button onclick="app.startExamMode()" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> 再次模擬測驗
+                    </button>
+                    <button onclick="app.showHome()" class="px-6 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-medium text-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-house"></i> 回主頁面
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Question Review Section -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass font-normal text-blue-400"></i> 本次檢定答題明細對照
+                    </h3>
+                    <div class="flex gap-2 text-xs">
+                        <button onclick="app.filterResultReview('all')" id="btn-filter-all" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium">全部</button>
+                        <button onclick="app.filterResultReview('wrong')" id="btn-filter-wrong" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700">僅看錯題</button>
+                    </div>
+                </div>
+
+                <!-- Review Items Container -->
+                <div id="result-review-list" class="space-y-4">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p>微析科技 CRM 顧客關係管理商品分析師 認證檢定考題系統 (300題全集)</p>
+            <p>© Microanalysis Tech Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ================= MODAL: QUESTION MATRIX NAVIGATION ================= -->
+    <div id="modal-matrix" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-fade-in">
+            <!-- Header -->
+            <div class="p-4 sm:p-5 border-b border-slate-700 flex items-center justify-between bg-slate-800/90">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-solid fa-table-cells"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">題目導航矩陣 (答題卡)</h4>
+                        <p class="text-xs text-slate-400">點擊任意題號快速跳轉頁面</p>
+                    </div>
+                </div>
+                <button onclick="app.closeQuestionMatrix()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Legend -->
+            <div class="px-5 py-2.5 bg-slate-900/60 border-b border-slate-700/60 flex flex-wrap items-center gap-4 text-xs text-slate-300">
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-blue-600 border border-blue-400"></span> 當前題</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-600"></span> 已作答/對</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-600"></span> 答錯</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-700"></span> 未作答</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-500"></span> 收藏星號</div>
+            </div>
+
+            <!-- Grid Items Container -->
+            <div class="p-5 overflow-y-auto flex-grow">
+                <div id="matrix-grid-container" class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                    <!-- Grid cells injected here -->
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-slate-700 bg-slate-800 flex justify-end">
+                <button onclick="app.closeQuestionMatrix()" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold">
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: CUSTOM DIALOG (Alert/Confirm) ================= -->
+    <div id="modal-dialog" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 space-y-5 shadow-2xl animate-fade-in text-center">
+            <div id="dialog-icon" class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <div class="space-y-2">
+                <h4 id="dialog-title" class="text-lg font-bold text-white">提示訊息</h4>
+                <p id="dialog-msg" class="text-sm text-slate-300 leading-relaxed">請確認操作內容。</p>
+            </div>
+            <div class="flex justify-center gap-3 pt-2">
+                <button id="dialog-cancel-btn" class="px-5 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs font-semibold transition">
+                    取消
+                </button>
+                <button id="dialog-confirm-btn" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition shadow-lg shadow-blue-600/30">
+                    確認
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= APP LOGIC & COMPLETE DATA BANK ================= -->
+    <script>
+        /**
+         * CRM 顧客關係管理商品分析師 完整 300 題題目資料庫
+         * 包含每題之題目、選項 (A, B, C, D) 與標準答案 (0-indexed: A=0, B=1, C=2, D=3)
+         */
+        const QUESTION_BANK = [
+            { id: 1, q: "顧客關係管理資料處理的四大實施步驟，除了「資料、資訊的儲存與累積」、「資料、資訊的分析與整理」、「資料、資訊的展現與應用」還有哪一項？", options: ["(A) 資料、資訊的比對", "(B) 資料、資訊的蒐集", "(C) 資料、資訊的驗證", "(D) 資料、資訊的考核"], ans: 1 },
+            { id: 2, q: "顧客關係管理程序 (The steps of customer relationship management) 包括哪四部分？", options: ["(A) 知識發掘、市場行銷計畫、顧客互動及分析與修正", "(B) 景氣發掘、市場生產計畫、顧客互動及分析與修正", "(C) 景氣發掘、市場行銷計畫、顧客互動及分析與修正", "(D) 知識發掘、市場生產計畫、顧客互動及分析與修正"], ans: 0 },
+            { id: 3, q: "哪一種行銷係透過感官(sense)、情感(feel)、思考(think)、行動(act)及關聯(relate)等五項要件之塑造，為顧客創造不同之體驗型式。其目的即是為顧客創造美好的品牌消費經驗？", options: ["(A) 體檢行銷", "(B) 體面行銷", "(C) 考驗行銷", "(D) 體驗行銷"], ans: 3 },
+            { id: 4, q: "「客單價提升」是指什麼要素的提升？", options: ["(A) 購買數量與購買價格", "(B) 購買數量", "(C) 購買數量與平均購買單價", "(D) 購買價格"], ans: 2 },
+            { id: 5, q: "對於懷疑心重的顧客該如何應對，下列何者為非？", options: ["(A) 營造輕鬆的談話氣氛", "(B) 以優越的說服力來解除顧客疑惑", "(C) 以忍耐、寬容的胸懷應對", "(D) 察言觀色、刺探顧客的心意，再為其說明"], ans: 1 },
+            { id: 6, q: "下列哪一種方法無法了解顧客對於商店的服務品質之預期與知覺？", options: ["(A) 對顧客進行問卷調查", "(B) 收集顧客抱怨的資料", "(C) 門市服務人員回報有關顧客的資訊", "(D) 分析門市銷售相關資料"], ans: 3 },
+            { id: 7, q: "產品或服務放在機器內，顧客用零錢或信用卡來購買該產品稱為下列何項？", options: ["(A) 自動販賣", "(B) 郵購", "(C) 直效行銷", "(D) 電子商務"], ans: 0 },
+            { id: 8, q: "11月的第二個禮拜的週四是薄酒萊的上市日期，請問，此時薄酒萊對於賣場而言是屬於賣場中的？", options: ["(A) 主力商品", "(B) 輔助商品", "(C) 展示商品", "(D) 重要商品"], ans: 0 },
+            { id: 9, q: "對於促銷目的的說法，何種有誤？", options: ["(A) 增加員工訓練機會", "(B) 增加特定商品銷售", "(C) 增加來店購買率", "(D) 穩定既有顧客"], ans: 0 },
+            { id: 10, q: "下列何者不是傾聽顧客抱怨的目的？", options: ["(A) 讓顧客發洩不滿意的情緒", "(B) 讓顧客深信可以獲得補償", "(C) 讓顧客覺得店方重視他的抱怨", "(D) 瞭解事情的始末與顧客的想法"], ans: 1 },
+            { id: 11, q: "下列何者不是商店促銷應檢核之重點？", options: ["(A) 促銷商品品質是否良好", "(B) 商品是否恢復原價", "(C) 促銷商品是否齊全", "(D) 商品數量是否足夠"], ans: 1 },
+            { id: 12, q: "服務業基於行業的特性，多關心顧客的一句話或一個小動作即可減少無謂的爭端，下列敘述何者為誤？", options: ["(A) 主動積極提供顧客購買參考資訊，避免顧客選擇錯誤", "(B) 多一句話提醒或關心顧客的言語，事後較不會有爭端", "(C) 顧客若有遷怒的反應，不要理會最好", "(D) 多一點額外的服務才是服務業的用心"], ans: 2 },
+            { id: 13, q: "培養門市人員的敏感度、適時反應及應變能力，以避免不必要的情況產生，下列敘述何者為誤？", options: ["(A) 顧客的理直氣壯或據理力爭一定事出有因", "(B) 立即對顧客作出承諾", "(C) 有疑惑馬上反應或請示主管處理", "(D) 不必和顧客斤斤計較，以免把場面弄成僵局"], ans: 1 },
+            { id: 14, q: "以下何項不是「服務」的特性？", options: ["(A) 易變性", "(B) 易逝性", "(C) 可儲存", "(D) 無形性"], ans: 2 },
+            { id: 15, q: "物流中心最主要的系統內容有哪兩大項？", options: ["(A) 物流作業系統、金流系統", "(B) 資訊流系統、金流系統", "(C) 商流系統、物流作業系統", "(D) 物流作業系統、資訊流系統"], ans: 3 },
+            { id: 16, q: "下列關於專賣店與百貨公司之比較，何者正確？", options: ["(A) 專賣店的產品線窄而深，百貨公司的產品線廣而淺", "(B) 專賣店的產品線窄而淺，百貨公司的產品線廣而深", "(C) 以顧客為尊的專業化經營管理為專賣店成功的重要指標，產品相關知識的提供是百貨公司最大的特色", "(D) 百貨公司以消費者生活型態作訴求；專賣店各樓層分類清楚、商品屬性以選購品為主"], ans: 0 },
+            { id: 17, q: "下列有關顧客服務的敘述，何者不正確？", options: ["(A) 顧客服務是一種門市行銷策略", "(B) 顧客服務是以滿足個別顧客的需求與慾望為最終目標", "(C) 優越的顧客服務能夠贏得顧客的心", "(D) 大型零售商應該比小型零售商更重視顧客服務"], ans: 3 },
+            { id: 18, q: "麥當勞依據當地消費的飲食偏好改良餐點的口味，如在台灣銷售飯食套餐，由此可知麥當勞採用何種產品策略？", options: ["(A) 直接延伸策略", "(B) 產品適應策略", "(C) 產品創新策略", "(D) 雙重適應策略"], ans: 1 },
+            { id: 19, q: "關於商店營運績效之反應，最直接的是？", options: ["(A) 顧客回應", "(B) 重購統計", "(C) 數據資料", "(D) 問卷調查"], ans: 2 },
+            { id: 20, q: "下列何者是電子商務安全性容易被顧客疑慮之處？", options: ["(A) 金流", "(B) 資訊流", "(C) 物流", "(D) 商流"], ans: 0 },
+            { id: 21, q: "全家便利商店推出第二件6折、與 7-11 推出滿 77 元送 Hello Kitty 磁鐵，均為何種促銷活動？", options: ["(A) 提升來店客", "(B) 提升客單價", "(C) 提升知名度", "(D) 提升指名度"], ans: 1 },
+            { id: 22, q: "下列何者不是顧客關係管理的工作？", options: ["(A) 商店的宣傳活動", "(B) 員工在職訓練", "(C) 例行的店務檢查", "(D) 顧客抱怨的處理"], ans: 1 },
+            { id: 23, q: "提供網路平台實體或虛擬貨物的流動，稱為哪種網路服務？", options: ["(A) 金流", "(B) 物流", "(C) 商流", "(D) 人流"], ans: 1 },
+            { id: 24, q: "基於消費者從事購買決策的方式，將商品區分為哪三種商品？", options: ["(A) 便利性商品、選購性商品、衝動性商品", "(B) 便利性商品、選購性商品、特殊性商品", "(C) 選購性商品、特殊性商品、衝動性商品", "(D) 選購性商品、衝動性商品、自有品牌商品"], ans: 1 },
+            { id: 25, q: "顧客關係管理程序 (The steps of customer relationship management) 包括哪四部分？", options: ["(A) 知識發掘、市場行銷計畫、顧客互動及分析與修正", "(B) 景氣發掘、市場生產計畫、顧客互動及分析與修正", "(C) 景氣發掘、市場行銷計畫、顧客互動及分析與修正", "(D) 知識發掘、市場生產計畫、顧客互動及分析與修正"], ans: 0 },
+            { id: 26, q: "彼得·杜拉克 (Peter Drucker) 在《管理的實踐》說：「企業有兩個，也只有兩個基本功能，它們能創造績效，其他都是開銷」，是哪兩個基本功能？", options: ["(A) 生產與行銷", "(B) 行銷與創新", "(C) 生產與競爭", "(D) 管理與創新"], ans: 1 },
+            { id: 27, q: "網站經營者藉由舉辦易聚集人潮之趣味競賽、明星新歌發表會等活動吸引眼球，藉由活動與商品連結，引起消費者注意，稱為哪種行銷手法？", options: ["(A) 事件活動", "(B) 異業結合", "(C) 價格優惠", "(D) 媒體廣告"], ans: 0 },
+            { id: 28, q: "Bruner(1986)認為故事是因為其接近個人生活而得到共鳴。一個好的故事應有哪兩個範疇？", options: ["(A) 主動與意見", "(B) 活動與意思", "(C) 主動與意義", "(D) 生動與意識"], ans: 3 },
+            { id: 29, q: "網路行銷鐵三角 (The Iron Triple of Internet Marketing) 是從哪三端的實務運作情形整合成兼具理論與實務的專案？", options: ["(A) 市場、企業及消費者", "(B) 市場、產業及生產者", "(C) 商場、產業及消費者", "(D) 市場、企業及生產者"], ans: 0 },
+            { id: 30, q: "將顧客的人口統計變項與購物習慣相連結，以找出產品偏好關聯性作為行銷參考的系統稱為？", options: ["(A) 生產偏好管理", "(B) 消費關係管理", "(C) 消費偏好管理", "(D) 顧客關係管理"], ans: 3 },
+            { id: 31, q: "何者是網路經營者導入網路市場首要注意與重視的課題？", options: ["(A) 網路品牌", "(B) 網站容量", "(C) 網頁新穎", "(D) 產品代言人"], ans: 0 },
+            { id: 32, q: "基本競爭策略 (generic competitive strategy) 包括哪三部分？", options: ["(A) 成本差異策略、差異化策略及成本集中化策略", "(B) 價格領導策略、產品差異化策略及地區集中化策略", "(C) 成本領導策略、差異化策略及集中化策略", "(D) 價格領導策略、差異化策略及分散化策略"], ans: 2 },
+            { id: 33, q: "「開發新顧客之餘，兼顧舊顧客的維持」是競爭性行銷策略的哪一部分？", options: ["(A) 防禦策略", "(B) 攻擊策略", "(C) 動態性行銷策略", "(D) 結構性行銷策略"], ans: 0 },
+            { id: 34, q: "彼得杜拉克認為企業創立的目的為何？", options: ["(A) 獲利", "(B) 服務", "(C) 品質第一", "(D) 創造客戶"], ans: 3 },
+            { id: 35, q: "客戶購買哪種商品，考慮的因素較多？", options: ["(A) 飲料", "(B) 房子", "(C) 香煙", "(D) 水果"], ans: 1 },
+            { id: 36, q: "顧客在電視節目上觀看產品說明與介紹，透過電話來訂購產品稱為下列何項？", options: ["(A) 電視購物", "(B) 型錄郵購", "(C) 直效行銷", "(D) 電子商務"], ans: 0 },
+            { id: 37, q: "顧客要求退換貨或退款的處理，何者不正確？", options: ["(A) 無論原因，超過7天不可退換貨或退款", "(B) 要求退換貨依據公司政策作合理判定執行要求", "(C) 藉由退換貨原因可了解顧客不滿意作為改進依據", "(D) 最好在服務台或指定地點進行作業"], ans: 0 },
+            { id: 38, q: "以下何者指標不適於用來評估商店的銷售效果？", options: ["(A) 平均經過該地區的人數", "(B) 進入商店的百分比", "(C) 進入商店且購物的百分比", "(D) 損益平衡分析"], ans: 3 },
+            { id: 39, q: "下列何項不包含於「增加市場滲透」的方法？", options: ["(A) 在目標市場上，透過開店數，以吸引新顧客", "(B) 賣場的清潔", "(C) 展示商品增加衝動性購買", "(D) 訓練銷售人員進行越區銷售"], ans: 1 },
+            { id: 40, q: "王小姐在超市排隊結帳，突然開新櫃檯，排後面的顧客全衝過去結帳，讓王小姐產生何種情緒？", options: ["(A) 受到不公平待遇", "(B) 不受尊重", "(C) 不被信任", "(D) 被冷落"], ans: 0 },
+            { id: 41, q: "小孩子在店舖中奔跑摔倒撞到貨架，下列敘述何者有誤？", options: ["(A) 平時應注意安全問題或提醒及緊急應變處理", "(B) 關心小孩並注意其是否受傷，作必要的護理或送醫", "(C) 貨架轉角設計多角型或擺設雜亂時須特別注意安全", "(D) 設備若有損害可能性時應報修，待維修人員到達再暫停使用"], ans: 3 },
+            { id: 42, q: "在新產品上市前期，為了讓消費者知道商品訊息，應採下列何種作為？", options: ["(A) 大量廣告宣傳", "(B) 降價促銷", "(C) 發送折價券", "(D) 避免產品曝光"], ans: 0 },
+            { id: 43, q: "店舖對逃生路線及設備的知識，下列哪一項敘述不正確？", options: ["(A) 防火門及樓梯門應經常關閉且自動關閉裝置維持有效", "(B) 可改建樓梯的防火牆、防煙間及走火通道牆壁", "(C) 不得堵塞樓梯間的防火窗戶及通氣口", "(D) 店舖應設置指示燈以防停電逃生"], ans: 1 },
+            { id: 44, q: "門市加強服務態度，下列敘述何者不正確？", options: ["(A) 以客為尊前提下，教育員工熱忱誠意對待顧客", "(B) 站在顧客立場與同理心經營顧客的心", "(C) 以各角度讓顧客感受服務價值", "(D) 以店頭促銷增加服務的機會及顧客的滿意度"], ans: 3 },
+            { id: 45, q: "對於愛唱反調的顧客，不應該有的應對態度為何？", options: ["(A) 採取詢問的方式應對", "(B) 耐心傾聽、不責難、不批評", "(C) 當場找出顧客錯誤的地方嚴正指責", "(D) 採取開放態度理性應對"], ans: 2 },
+            { id: 46, q: "店舖在銷售完成前避免誤會爭議，哪一項為正確作業？", options: ["(A) 顧客尚未作購買決定前催促顧客", "(B) 顧客決定不買時仍以禮貌態度對待顧客", "(C) 未能合理處理問題並以諷刺言談對待", "(D) 對顧客企圖以高壓迫使其購買"], ans: 1 },
+            { id: 47, q: "附屬顧客服務可提升商店形象，下列何者為超級市場的附屬服務？", options: ["(A) 代客送貨", "(B) 免費停車", "(C) 退換貨", "(D) 親切有禮的服務態度"], ans: 0 },
+            { id: 48, q: "下列四種因果關係(a:顧客滿意, b:為商店創造價值, c:為顧客創造價值, d:建立顧客關係)，何者正確？", options: ["(A) a → b → c → d", "(B) d → b → c → a", "(C) c → a → d → b", "(D) c → a / b → d"], ans: 3 },
+            { id: 49, q: "婦人挑選鮮豔花襯衫並詢問意見，哪種說法較不傷顧客自尊？", options: ["(A) 這件太花俏了", "(B) 素一點的花色比較能襯托您的氣質", "(C) 這件比較適合年輕人穿", "(D) 這件的花色不適合您的年紀"], ans: 1 },
+            { id: 50, q: "強化顧客滿意度的重要性，下列敘述何者不正確？", options: ["(A) 了解顧客並發掘潛在需求", "(B) 對顧客的需求做出正確回應", "(C) 滿意度提高，再購率便增加", "(D) 以廣告訴求強化品牌忠誠度，提高顧客滿意度"], ans: 3 },
+            { id: 51, q: "店舖營運標準化內容包含？", options: ["(A) 店舖運作流程與人員配置計畫、商品管理系統、店舖設備與情報管理", "(B) 操作流程管理、商品管理系統、待客服務、營業報表與情報管理", "(C) 營業報表、管理系統、待客服務、人力資源與情報管理", "(D) 店舗管理、服務管理、人力資源、營業報表與情報管理"], ans: 0 },
+            { id: 52, q: "重視客戶忠誠度及再購買商品，屬於下列何項系統？", options: ["(A) CRM", "(B) ERP", "(C) JIT", "(D) SCM"], ans: 0 },
+            { id: 53, q: "零售業與高科技結合是發展趨勢，以下何者不是其興起的原因？", options: ["(A) 提高作業效率", "(B) 提升管理能力", "(C) 增加市場競爭力", "(D) 提高促銷使用"], ans: 3 },
+            { id: 54, q: "下列何者可確保顧客感受到的門市服務品質超出預期？", options: ["(A) 設定目前門市能夠達到的服務品質標準", "(B) 訓練特定幾位專門提供顧客服務的員工", "(C) 掌握顧客期望與知覺的資訊，以便提升服務品質", "(D) 提供超出顧客期望的服務保證資訊"], ans: 2 },
+            { id: 55, q: "顧客吃完速食食物中毒，發現是機器溫控異常導致變質，店舖責任敘述何者為誤？", options: ["(A) 依消保法規定，顧客可要求店舖負責並請求損害賠償", "(B) 商品有危害生命健康可能時，應於明顯處為警告標示", "(C) 依食品衛生管理法，禁止販賣逾期或變質商品", "(D) 衛生署及縣市政府不可將出賣人移送法辦，僅能罰款"], ans: 1 },
+            { id: 56, q: "對於促銷目的的說法，何種有誤？", options: ["(A) 增加員工訓練機會", "(B) 增加特定商品銷售", "(C) 增加來店購買率", "(D) 穩定既有顧客"], ans: 0 },
+            { id: 57, q: "當顧客抱怨發生時，以下何者不是銷售人員應有的態度？", options: ["(A) 置之不理", "(B) 快速回應", "(C) 和顏悅色", "(D) 傾聽顧客抱怨"], ans: 0 },
+            { id: 58, q: "降價大戰的主要原因為何？", options: ["(A) 阻止潛在競爭者", "(B) 存貨週轉率高", "(C) 擴大市場佔有率", "(D) 經濟蓬勃發展"], ans: 2 },
+            { id: 59, q: "婦人抱着小孩選購衣服，服飾店員如何處理才能贏得高度滿意？", options: ["(A) 建議直接買回去試，不合再來退換", "(B) 幫忙抱小孩或置於兒童專用椅讓顧客試穿", "(C) 幫顧客量身材確認尺寸", "(D) 請顧客改日再來選購"], ans: 1 },
+            { id: 60, q: "當發現顧客未結帳或順手牽羊行為時，下列哪一項作法不適當？", options: ["(A) 察覺異常則詢問是否需要服務", "(B) 若走出大門則和緩提醒其結帳", "(C) 若心虛結帳要曉以利害關係使其不犯", "(D) 若係無心非故意，不要在意顧客可能的態度"], ans: 2 },
+            { id: 61, q: "銷售人員藉由到府拜訪推銷商品且當場完成交易稱為？", options: ["(A) 電視購物", "(B) 郵購", "(C) 直銷", "(D) 電子商務"], ans: 2 },
+            { id: 62, q: "集客力就是：", options: ["(A) 吸引顧客來店的能力", "(B) 集中顧客的能力", "(C) 主動開發客源能力", "(D) 集合顧客來店消費"], ans: 0 },
+            { id: 63, q: "零售業如何建造忠誠度的作法包含下列何項？", options: ["(A) 市場滲透", "(B) 透過忠誠規劃和顧客建立情感關係", "(C) 市場擴大", "(D) 市場多角化"], ans: 1 },
+            { id: 64, q: "儘量不讓客人等太久的高速率應對服務，下列敘述何者正確？", options: ["(A) 透過人員服務協助顧客縮短選擇商品時間", "(B) 前半段推銷期待顧客購買的商品", "(C) 隨後半段服務符合顧客希望的商品", "(D) 拉長購買時間多拿商品探求意向"], ans: 0 },
+            { id: 65, q: "下列哪一項是控制危機最省錢最簡單的方法？", options: ["(A) 嗅到危機的存在", "(B) 擬妥危機計畫", "(C) 迅速解決危機", "(D) 預防危機發生"], ans: 3 },
+            { id: 66, q: "Michael Porter 提出的三個一般化策略，不包括下列哪一項？", options: ["(A) 差異化策略", "(B) 價格領先策略", "(C) 成本領先策略", "(D) 焦點策略"], ans: 1 },
+            { id: 67, q: "晶華酒店買下麗晶品牌與特許權成為國際頂級酒店經營者，此成長方式屬於何種策略？", options: ["(A) 垂直整合策略", "(B) 水平式擴張策略", "(C) 外包策略", "(D) 自創品牌策略"], ans: 1 },
+            { id: 68, q: "鴻海執行面板、主機板、組裝至物流與通路，是何種程度非常高的企業？", options: ["(A) 垂直整合程度", "(B) 水平式擴張程度", "(C) 外包程度", "(D) 自創品牌程度"], ans: 0 },
+            { id: 69, q: "甲骨文為進軍伺服器市場收購昇陽資源，是利用購併策略動機裡的哪一項？", options: ["(A) 取得所需資源與能力", "(B) 市場延伸或產品線延伸", "(C) 迅速目標進入市場", "(D) 進行非相關多角化"], ans: 0 },
+            { id: 70, q: "服務人員應有的特性，下列敘述何者錯誤？", options: ["(A) 技術單一性", "(B) 任務辨別性", "(C) 任務價值性", "(D) 自主性"], ans: 0 },
+            { id: 71, q: "對第一線人員授權的目的是什麼？", options: ["(A) 提升個人的內在工作動機", "(B) 在於當顧客抱怨發生的第一時間即能解決問題", "(C) 提升工作目標的價值所在", "(D) 個人能擁有創新與控制行為的選擇權"], ans: 1 },
+            { id: 72, q: "企業為了增進其對社會大眾與政府的關係，應採用：", options: ["(A) 產品廣告", "(B) 個人推銷", "(C) 促銷活動", "(D) 公共關係"], ans: 3 },
+            { id: 73, q: "就一企業而言，下列何者是企業的利害關係人 (Stakeholders)？", options: ["(A) 顧客", "(B) 員工", "(C) 供應商", "(D) 以上皆是"], ans: 3 },
+            { id: 74, q: "企業運用廣告、促銷、公關、人員銷售及直效行銷等五項工具又稱為：", options: ["(A) 行銷組合", "(B) 推廣組合", "(C) 廣告組合", "(D) 溝通"], ans: 1 },
+            { id: 75, q: "利用歷史銷售資料建立迴歸分析模式來預測未來營業額稱為：", options: ["(A) 簡單趨勢分析", "(B) 統計需求分析", "(C) 市場請銷", "(D) 經濟計量模型"], ans: 0 },
+            { id: 76, q: "銀行與營利組織簽約發行，持卡消費可獲折扣優惠的卡片稱為？", options: ["(A) 認同卡", "(B) 風格卡", "(C) 聯名卡", "(D) 提款卡"], ans: 2 },
+            { id: 77, q: "消費者的基本權利包含？", options: ["(A) 安全的權利", "(B) 瞭解的權利", "(C) 求償的權利", "(D) 以上皆是"], ans: 3 },
+            { id: 78, q: "下列何者為國際行銷產生的原因？", options: ["(A) 資源有限、慾望無窮", "(B) 尋求競爭利基", "(C) 消費者購買力的隱藏", "(D) 促進消費者團結"], ans: 1 },
+            { id: 79, q: "消費者購買的過程為何？", options: ["(A) 資訊搜集→需要的確認→方案評估→購買決策→購後行為", "(B) 需要的確認→資訊搜集→購買決策→方案評估→購後行為", "(C) 需要的確認→資訊搜集→方案評估→購買決策→購後行為", "(D) 資訊搜集→需要的確認→購買決策→方案評估→購後行為"], ans: 2 },
+            { id: 80, q: "人員推銷與廣告二種促銷工具之比較，下列何者錯誤？", options: ["(A) 人員推銷較能與潛在消費者直接接觸", "(B) 廣告較能深入各消費階層", "(C) 人員推銷較能與顧客建立良好情感", "(D) 廣告比人員推銷更具強迫性，強迫消費者聆聽"], ans: 3 },
+            { id: 81, q: "購貨折扣、商業折讓、推銷獎金是對何者所做的促銷活動？", options: ["(A) 消費者", "(B) 經銷商", "(C) 推銷員", "(D) 顧客"], ans: 1 },
+            { id: 82, q: "下列何者不是廣告的特性？", options: ["(A) 高度大眾化的溝通方式", "(B) 非常普及的媒體", "(C) 具有強制力", "(D) 能透過各種表達方式吸引注意"], ans: 2 },
+            { id: 83, q: "消費者忠於熟悉品牌並習慣購買，此為：", options: ["(A) 經濟型購買", "(B) 理智型購買", "(C) 習慣性購買", "(D) 情感型購買"], ans: 2 },
+            { id: 84, q: "下列敘述何者錯誤？", options: ["(A) 廣告訊息應能提供消費者解決問題的方法", "(B) 廣告訊息應符合消費者的期望與需求", "(C) 廣告訊息無需結合品牌", "(D) 廣告訊息應可透過媒體傳達"], ans: 2 },
+            { id: 85, q: "下列何者不是針對消費者的促銷工具？", options: ["(A) 優惠券", "(B) 現金回饋", "(C) 來店禮", "(D) 銷售獎金"], ans: 3 },
+            { id: 86, q: "婚紗公司廣告強調「燈光美、氣氛佳」，屬於何種行銷決策內涵？", options: ["(A) 服務環境", "(B) 服務人員", "(C) 服務過程", "(D) 服務傳遞"], ans: 0 },
+            { id: 87, q: "有關直銷的特徵，下列敘述何者錯誤？", options: ["(A) 直銷需要投入大量資金", "(B) 直銷不必受制時空因素", "(C) 直接接觸消費者", "(D) 可以全職或兼職"], ans: 0 },
+            { id: 88, q: "製造商花費大量預算廣告促銷以激起消費者需求的策略為？", options: ["(A) 推的策略", "(B) 拉的策略", "(C) 深度策略", "(D) 以上皆非"], ans: 1 },
+            { id: 89, q: "企業對消費者或顧客之電子商務活動為：", options: ["(A) B2B", "(B) B2C", "(C) B2A", "(D) C2C"], ans: 1 },
+            { id: 90, q: "多芬洗髮精邀請消費者現身說法說明使用心得，屬於何種廣告？", options: ["(A) 提醒性廣告", "(B) 告知性廣告", "(C) 說服性廣告", "(D) 以上皆非"], ans: 1 },
+            { id: 91, q: "消費者行為分析的「六W」，是指 Who、How、Why、What、Where 及？", options: ["(A) Whom", "(B) When", "(C) Want", "(D) Which"], ans: 1 },
+            { id: 92, q: "所謂「網路行銷」，下列何者為非？", options: ["(A) 企業各種訊息透過網際網路工具傳播", "(B) 藉由 Internet 達到企業行銷目的", "(C) 架設全球資訊網站為唯一的行銷管道", "(D) 權力將由賣方轉至買方"], ans: 2 },
+            { id: 93, q: "對消費者來說，網路行銷提供的好處有：", options: ["(A) 不受銷售人員干擾", "(B) 可滿足多元化心理需求", "(C) 資訊充足", "(D) 以上皆是"], ans: 3 },
+            { id: 94, q: "消費者在購買過程中對價格、品質經過比較後才購買的產品稱為：", options: ["(A) 便利品", "(B) 選購品", "(C) 特殊品", "(D) 耐久品"], ans: 1 },
+            { id: 95, q: "用經濟有效的方法將產品從生產者移轉到消費者手上的活動稱為：", options: ["(A) 分配", "(B) 消費", "(C) 銷售", "(D) 行銷"], ans: 3 },
+            { id: 96, q: "網路購物中，製造商直接與消費者接觸，通路結構是：", options: ["(A) 零階", "(B) 一階", "(C) 二階", "(D) 三階"], ans: 0 },
+            { id: 97, q: "臺灣早期速食麵僅1種口味1種包裝銷售給所有消費者，這是一種：", options: ["(A) 差異行銷策略", "(B) 無差異行銷策略", "(C) 分散行銷策略", "(D) 集中行銷策略"], ans: 1 },
+            { id: 98, q: "所謂行銷的意義就是：", options: ["(A) 銷售", "(B) 推廣活動", "(C) 廣告", "(D) 滿足消費者的需求"], ans: 3 },
+            { id: 99, q: "由開發業者事先規劃，集合多種店態設施於特定建築統一管理提供一次購足場所是：", options: ["(A) 量販店", "(B) 商店街", "(C) 購物中心", "(D) 物流中心"], ans: 2 },
+            { id: 100, q: "有關網路購物的敘述，何者為非？", options: ["(A) 在網路上進行購物的活動", "(B) 經營者需具備電腦、網路服務等條件", "(C) 對消費者而言能節省購物時間", "(D) 對經營者而言縮短了他的行銷通路"], ans: 3 },
+            { id: 101, q: "零售業者採連鎖方式經營之優點，下列何者為非？", options: ["(A) 大量採購有較大議價空間", "(B) 提供更多的創業機會", "(C) 使個別連鎖店之創意有發揮機會", "(D) 提供消費者更多消費資訊"], ans: 2 },
+            { id: 102, q: "當消費者對某物的需求太多，超過廠商所能提供的水準時，稱為：", options: ["(A) 飽和需求", "(B) 潛在需求", "(C) 過度需求(過飽和需求)", "(D) 衰退需求"], ans: 2 },
+            { id: 103, q: "在目標消費者心目中建立屬於品牌本身的獨特地位與個性稱為：", options: ["(A) 定位", "(B) 聯盟", "(C) 區隔", "(D) 集中策略"], ans: 0 },
+            { id: 104, q: "信用卡推出免年費促銷吸引學生及潛在消費者，屬於何種行銷？", options: ["(A) 再行銷", "(B) 維護行銷", "(C) 反行銷", "(D) 開發行銷"], ans: 3 },
+            { id: 105, q: "電子報開闢新聞、娛樂、財經等專區滿足不同消費者，屬於何種電商模式？", options: ["(A) B to B", "(B) B to C", "(C) C to B", "(D) 企業內部電子商業"], ans: 1 },
+            { id: 106, q: "高介入消費者且了解品牌之間存在顯著差異，其購買行為屬於：", options: ["(A) 複雜的購買行為", "(B) 尋求多樣化的購買行為", "(C) 降低失調的購買行為", "(D) 習慣性購買行為"], ans: 0 },
+            { id: 107, q: "探討如何透過客觀系統化收集資訊以做出最佳行銷決策是：", options: ["(A) 消費者行為", "(B) 行銷研究", "(C) 多變量分析", "(D) 以上皆非"], ans: 1 },
+            { id: 108, q: "有關服務業的特性，何者有誤？", options: ["(A) 服務品質的知覺會每人相同", "(B) 服務業與消費者的接觸比製造業多", "(C) 服務業的生產與傳遞是同時發生的", "(D) 服務業的產出是無形的"], ans: 0 },
+            { id: 109, q: "下列何者不屬於商業外在環境的變遷？", options: ["(A) 政府放鬆戒急用忍政策", "(B) 消費者哈日風興起", "(C) 組織結構的扁平化", "(D) 電子商務的興起"], ans: 2 },
+            { id: 110, q: "問卷調查性別與年齡兩個變數，屬於何種消費者區隔變數？", options: ["(A) 地理變數", "(B) 人口變數", "(C) 心理變數", "(D) 行為變數"], ans: 1 },
+            { id: 111, q: "下列何者是消費者對消費者 (C to C) 的電子商務類型？", options: ["(A) 統一超商 EOS 系統", "(B) Yahoo 拍賣網站", "(C) 博客來網路書店", "(D) 汽車廠商直營網站"], ans: 1 },
+            { id: 112, q: "創新採用模式 (innovation-adoption) 的五階段次序應為：(a興趣 b注意 c試用 d評估 e採用)", options: ["(A) a-b-c-d-e", "(B) a-c-b-d-e", "(C) b-a-d-c-e", "(D) b-a-d-e-c"], ans: 2 },
+            { id: 113, q: "下列何者不是消費者的心理因素？", options: ["(A) 性別", "(B) 學習", "(C) 知覺", "(D) 動機"], ans: 0 },
+            { id: 114, q: "下列有關消費者社會階級 (social classes) 的敘述，何者正確？", options: ["(A) 社會階級不受職業收入影響", "(B) 每一階級內的消費者具有相似的價值觀、興趣及行為", "(C) 每一階級內的消費者具有不相似的價值觀", "(D) 不同階級消費者表現相似價值觀"], ans: 1 },
+            { id: 115, q: "直效行銷採 RFM 公式排序選擇顧客，即最近(Recency)、次數(Frequency)與？", options: ["(A) 記憶", "(B) 購買金額(Monetary)", "(C) 特性", "(D) 地區"], ans: 1 },
+            { id: 116, q: "以消費者為主體分析需求並推出產品滿足的經營型態稱為？", options: ["(A) 產品導向", "(B) 行銷導向", "(C) 銷售導向", "(D) 生產導向"], ans: 1 },
+            { id: 117, q: "以下何者非社會行銷導向的三要素：", options: ["(A) 公司利潤", "(B) 消費者滿足", "(C) 員工滿意", "(D) 社會福利"], ans: 2 },
+            { id: 118, q: "下列何者不是個人經濟狀況的特徵？", options: ["(A) 資產", "(B) 負債", "(C) 性向", "(D) 儲蓄"], ans: 2 },
+            { id: 119, q: "消費者購買決策過程始於下列何者？", options: ["(A) 需求認知", "(B) 資料蒐集", "(C) 方案評估", "(D) 購買決策"], ans: 0 },
+            { id: 120, q: "下列哪一個項目不屬於消費者購買決策過程的階段？", options: ["(A) 問題認知", "(B) 資訊收集", "(C) 市場定位", "(D) 方案評估"], ans: 2 },
+            { id: 121, q: "下列何項是人員訪問調查的缺點？", options: ["(A) 回收率偏低", "(B) 容易受訪員影響而產生偏見", "(C) 問卷題目不宜過多", "(D) 無法得到態度資料"], ans: 1 },
+            { id: 122, q: "提供除了購物以外休閒娛樂功能的購物中心有：(1.購物目的 2.工廠直銷 3.休閒娛樂 4.綜合使用)", options: ["(A) 1.2.", "(B) 1.3.", "(C) 2.3.", "(D) 3.4."], ans: 3 },
+            { id: 123, q: "何謂服務業鐵三角？", options: ["(A) 老闆、經理人與員工", "(B) 經理人、員工與消費者", "(C) 公司、員工與消費者", "(D) 老闆、經理人與消費者"], ans: 2 },
+            { id: 124, q: "對消費者實施充分廣告以喚起需求吸引主動購買稱為：", options: ["(A) 拉式戰略", "(B) 推式戰略", "(C) 路線戰略", "(D) 價格戰略"], ans: 0 },
+            { id: 125, q: "行銷人員進行市場區隔時，下列何者不屬於消費者的特徵？", options: ["(A) 居住地區", "(B) 家庭", "(C) 生活型態", "(D) 產品特徵"], ans: 3 },
+            { id: 126, q: "下列何者非為「無差異行銷」的特點？", options: ["(A) 集中於消費者的共同需要", "(B) 與標準化大量生產相符", "(C) 可提高銷售總額，但成本也較高", "(D) 乃基於成本經濟性考量"], ans: 2 },
+            { id: 127, q: "百貨業者把 100 元的產品訂為 99 元吸引購買稱為：", options: ["(A) 統一價格", "(B) 吸脂價格", "(C) 畸零價格", "(D) 習慣價格"], ans: 2 },
+            { id: 128, q: "運用差別訂價使需求量不因時間改變而波動劇烈的行銷方式為：", options: ["(A) 反行銷", "(B) 抑制行銷", "(C) 同步行銷", "(D) 維護行銷"], ans: 2 },
+            { id: 129, q: "服務業主要靠著下列何者以滿足消費者？", options: ["(A) 人員訓練", "(B) 自動化", "(C) 商品運輸", "(D) 以上皆非"], ans: 0 },
+            { id: 130, q: "商業網站因違法被停業，針對其角色與責任敘述何者較不適當？", options: ["(A) 商業角色是擔任橋樑", "(B) 社會責任是促進社會大眾整體利益", "(C) 從事商業活動在商言商，任何商品均可銷售", "(D) 銷售仿冒品是違背法律責任"], ans: 2 },
+            { id: 131, q: "由原料製成商品經過配送流通至消費者之程序稱為：", options: ["(A) 金流", "(B) 物流", "(C) 資訊流", "(D) 商流"], ans: 1 },
+            { id: 132, q: "便利商店進整箱礦泉水拆成單瓶賣給消費者，屬於零售業何種功能？", options: ["(A) 分配商品", "(B) 儲存商品", "(C) 商品化", "(D) 分裝商品，便利購買"], ans: 3 },
+            { id: 133, q: "下列何者所銷售的商品不是供消費者作最終消費用？", options: ["(A) 屈臣氏", "(B) 金石堂書店", "(C) 油礦公司的原油", "(D) 華南銀行定存"], ans: 2 },
+            { id: 134, q: "透過印刷媒體將商品訊息告知消費者，利用郵政下單稱為：", options: ["(A) 訪問行銷", "(B) 電視行銷", "(C) 型錄行銷", "(D) 電話行銷"], ans: 2 },
+            { id: 135, q: "透過大眾媒體告知訊息，誘使消費者主動打電話訂購稱為：", options: ["(A) PB", "(B) 直接回應行銷", "(C) DIY", "(D) 郵購"], ans: 1 },
+            { id: 136, q: "網際網路行銷的優勢，下列敘述何者錯誤？", options: ["(A) 消費者可獲得更多資訊", "(B) 節省購物時間降低成本", "(C) 消費者可以直接看到或觸摸商品", "(D) 業者能獲取更多客戶資訊"], ans: 2 },
+            { id: 137, q: "下列何者扮演直接販賣商品給最後消費者的交易行為？", options: ["(A) 批發商", "(B) 經銷商", "(C) 代理商", "(D) 零售商"], ans: 3 },
+            { id: 138, q: "下列敘述何者錯誤？", options: ["(A) 相關性陳列法是將使用上有牽連產品陳列在一起", "(B) 陳列效果訴求包含強調季節性與流行性商品", "(C) 利用自然採光可有效節省能源", "(D) 賣場在顧客少時部分關燈可節省電費"], ans: 3 },
+            { id: 139, q: "下列有關購物中心的敘述，何者錯誤？", options: ["(A) 購物中心可滿足一次購足需求", "(B) 集合多種業態與業種於一身", "(C) 包括娛樂購物文化多元功能", "(D) 購物中心多以超級市場為主力商店"], ans: 3 },
+            { id: 140, q: "依據行銷觀念，「市場」是指：", options: ["(A) 產品者的買賣場所", "(B) 消費者購買能力", "(C) 產品銷售範圍", "(D) 有能力並有意願進行交易的顧客集合"], ans: 3 },
+            { id: 141, q: "認為大部分消費者都能接受，不必進行市場區隔的行銷策略為：", options: ["(A) 產品差異行銷策略", "(B) 集中行銷策略", "(C) 市場差異行銷策略", "(D) 無差異行銷策略"], ans: 3 },
+            { id: 142, q: "市場區隔的目的在於發現：", options: ["(A) 消費者偏好及購買能力", "(B) 競爭者人數", "(C) 產品的種類", "(D) 目標群體"], ans: 3 },
+            { id: 143, q: "若市場上消費者需求與品味差異極大，廠商宜採取：", options: ["(A) 無差異行銷", "(B) 低行銷", "(C) 差異行銷", "(D) 以上皆非"], ans: 2 },
+            { id: 144, q: "公司設計行銷方案迎合大多數消費者需求，是使用下列哪一項策略？", options: ["(A) 差異行銷策略", "(B) 無差異行銷策略", "(C) 密集性行銷策略", "(D) 集中行銷策略"], ans: 1 },
+            { id: 145, q: "利用變數將消費者分為不同顧客群並提供最適合產品稱為：", options: ["(A) 成本優勢", "(B) 利基", "(C) 市場區隔化", "(D) 產品差別化"], ans: 2 },
+            { id: 146, q: "下列何種產業較適合採用連鎖加盟的型態經營？", options: ["(A) 市場環境變動小", "(B) 商品的購買頻率低", "(C) 消費者很容易封可以買到的商品", "(D) 以上皆是"], ans: 0 },
+            { id: 147, q: "在行銷交易過程中，能滿足消費者需要的任何東西謂之：", options: ["(A) 定價", "(B) 產品", "(C) 促銷", "(D) 公關"], ans: 1 },
+            { id: 148, q: "產品能帶給消費者利益是屬於：", options: ["(A) 有形產品", "(B) 核心產品", "(C) 擴大產品", "(D) 引伸產品"], ans: 1 },
+            { id: 149, q: "廠商把產品定位在高價水準使消費者產生高品質聯想，稱為：", options: ["(A) 成本定價法", "(B) 加成定價法", "(C) 利潤定價法", "(D) 名望定價法"], ans: 3 },
+            { id: 150, q: "以下何者屬於忠誠 (老) 顧客的特性？", options: ["(A) 每次買更多", "(B) 會幫忙推薦更多顧客", "(C) 願意買更貴的產品", "(D) 以上皆是"], ans: 3 },
+            { id: 151, q: "傳統百貨零售業的危機包括？", options: ["(A) 人員訓練與經營管理知識不足", "(B) 新興業態與連鎖加盟的威脅", "(C) 缺乏 CRM 顧客關係管理系統", "(D) 以上皆是"], ans: 3 },
+            { id: 152, q: "有關電話行銷的敘述，下列何者錯誤？", options: ["(A) 在1960年代末期興起", "(B) 有 call in 及 call out 兩種", "(C) 以電話與資訊技術為整合", "(D) 銷售人員及商品在電話行銷中都可以直接接觸"], ans: 3 },
+            { id: 153, q: "對品牌功用的敘述，何者正確？", options: ["(A) 區別本公司與競爭者", "(B) 創造顧客的忠誠", "(C) 便於顧客重複採購", "(D) 以上皆是"], ans: 3 },
+            { id: 154, q: "顧客可得價值 (customer delivered value) 是指：", options: ["(A) 顧客總價值與顧客總成本之間的差距", "(B) 期望與實際績效相比較後的感覺", "(C) 服務價值與時間成本差距", "(D) 折扣金額"], ans: 0 },
+            { id: 155, q: "記憶占有率 (share of mind) 是指：", options: ["(A) 在目標市場中的銷售占有率", "(B) 在顧客心中被最先提及的比率", "(C) 被認為最想向其購買的比率", "(D) 被認為最不想購買的比率"], ans: 1 },
+            { id: 156, q: "看電影時票價分為學生票、軍警票與普通票，此差別訂價是：", options: ["(A) 位置訂價", "(B) 時間訂價", "(C) 形象訂價", "(D) 顧客區隔訂價"], ans: 3 },
+            { id: 157, q: "顧客對產品的採用過程一般會經歷：", options: ["(A) 知曉、興趣、評估、試用、接受", "(B) 興趣、試用、知曉、評估、接受", "(C) 評估、試用、知曉、興趣、接受", "(D) 接受、知曉、興趣、評估、試用"], ans: 0 },
+            { id: 158, q: "下列何者不是全球物流營運之整合方式？", options: ["(A) 地理的整合", "(B) 功能的整合", "(C) 部門的整合", "(D) 顧客的整合"], ans: 3 },
+            { id: 159, q: "下列何者不是顧客價值的構面？", options: ["(A) 滿足顧客需求", "(B) 低價格", "(C) 加值服務", "(D) 產品選擇"], ans: 1 },
+            { id: 160, q: "一家商店大約7成顧客所來自的地理區域稱為：", options: ["(A) 黃金商圈", "(B) 邊緣商圈", "(C) 次要商圈", "(D) 主要商圈"], ans: 3 },
+            { id: 161, q: "「行銷觀念」(marketing concept) 認為企業必須全力達成下列哪項目標？", options: ["(A) 做更多廣告促銷", "(B) 將產品全部賣光", "(C) 同時滿足顧客與獲得利潤", "(D) 以最低成本生產"], ans: 2 },
+            { id: 162, q: "電信公司在假日對長途電話給予特殊折扣，是使用何種促銷策略？", options: ["(A) 購買時間", "(B) 顧客類型", "(C) 交易情況", "(D) 成本考量"], ans: 0 },
+            { id: 163, q: "童裝廠商邀請父母親進行詳談收集資料，採用何種方式？", options: ["(A) 個人面談", "(B) 焦點群體", "(C) 間接觀察", "(D) 以上皆非"], ans: 1 },
+            { id: 164, q: "讓顧客獲得獨特且有趣經驗的行銷方法屬於：", options: ["(A) 體驗行銷", "(B) 事件行銷", "(C) 病毒行銷", "(D) 客製化行銷"], ans: 0 },
+            { id: 165, q: "提高顧客知覺價值的方法除增加總價值外，另一個方法是什麼？", options: ["(A) 降低顧客購買的總成本", "(B) 提供贈品", "(C) 增加廣告", "(D) 增加通路"], ans: 0 },
+            { id: 166, q: "下列何者為大眾行銷的特徵？", options: ["(A) 雙向訊息", "(B) 個別顧客", "(C) 顧客佔有率", "(D) 大眾廣告"], ans: 3 },
+            { id: 167, q: "下列敘述何者正確？", options: ["(A) 傢俱服飾是便利品", "(B) 服務可儲存且變異性小", "(C) 顧客滿意度表達顧客愉悅或失望的程度", "(D) 啤酒是耐久財"], ans: 2 },
+            { id: 168, q: "波特五力分析中，下列何者不是此五個力量之一？", options: ["(A) 顧客", "(B) 供應商", "(C) 現存競爭者", "(D) 股東"], ans: 3 },
+            { id: 169, q: "下列何種觀念扮演滿足顧客需求的角色？", options: ["(A) 生產觀念", "(B) 銷售觀念", "(C) 行銷觀念", "(D) 行為觀念"], ans: 2 },
+            { id: 170, q: "關於行銷的敘述，下列何者錯誤？", options: ["(A) 行銷是企業功能之一", "(B) 行銷即有效滿足需求", "(C) 行銷是一種交換過程", "(D) 行銷不包含通路"], ans: 3 },
+            { id: 171, q: "以顧客需求為中心，透過顧客滿足創造利潤的觀念屬於：", options: ["(A) 銷售觀念", "(B) 行銷觀念", "(C) 社會行銷觀念", "(D) 生產觀念"], ans: 1 },
+            { id: 172, q: "銷售人員努力設計吸引注意力的開場白，屬於人員銷售哪一過程？", options: ["(A) 事前準備工作", "(B) 進行展示說明", "(C) 接觸潛在顧客", "(D) 篩選潛在顧客"], ans: 2 },
+            { id: 173, q: "顧客對產品所支付總成本與獲得總利益間的差值謂之：", options: ["(A) 顧客利益", "(B) 顧客價值", "(C) 顧客知覺效益", "(D) 顧客評價"], ans: 1 },
+            { id: 174, q: "留住顧客的方法有二：給予高度滿意及？", options: ["(A) 給予價格折扣", "(B) 建立移轉的高門檻", "(C) 使用贈品", "(D) 給予優惠"], ans: 1 },
+            { id: 175, q: "柯特勒提出商業提昇服務品質策略，下列何者是有問題的？", options: ["(A) 建立獨特的策略性觀念", "(B) 高階主管改善品質", "(C) 高服務品質設定", "(D) 只需要讓顧客滿意"], ans: 3 },
+            { id: 176, q: "下列有關品牌決策的敘述，哪一項目不正確？", options: ["(A) 7-11 販賣自家礦泉水是中間商品牌", "(B) 寶鹼推出海倫仙度絲飛柔是多品牌策略", "(C) 喜美汽車推出六代是品牌延伸", "(D) 宏碁推出手機使用 ACER 商標是家族品牌策略"], ans: 3 },
+            { id: 177, q: "以下哪個是建置 CRM 商業智慧，門市不需提供總公司的輔助元素？", options: ["(A) 顧客資料收集", "(B) 交易資料輸入", "(C) 銷售技巧經驗分享", "(D) 門市櫃員人事資料"], ans: 3 },
+            { id: 178, q: "哪個情況不適合採用差異化行銷？", options: ["(A) 公司資源豐富", "(B) 產品處於成熟期", "(C) 產品差異性高", "(D) 消費者同質性高"], ans: 3 },
+            { id: 179, q: "以下哪個不是顧客經驗管理？", options: ["(A) 品牌印象", "(B) 消費經驗", "(C) 銷售服務", "(D) 分析成交機率"], ans: 3 },
+            { id: 180, q: "以下哪個不是記錄顧客每一筆交易可作的統計分析？", options: ["(A) 關聯商品", "(B) 商品組合", "(C) 顧客潛在需求", "(D) 分店門市間的借貨調撥"], ans: 3 },
+            { id: 181, q: "以下哪個不是詳盡完整記錄顧客資料特質的好處？", options: ["(A) 分析成交機率", "(B) 櫃台結帳時主動告知個人專屬關聯商品資訊", "(C) 壽星促銷優惠通知", "(D) 即時查詢過往交易記錄與推薦商品"], ans: 0 },
+            { id: 182, q: "櫃台結帳時，無法根據哪個條件設定搜尋以供告知關聯商品？", options: ["(A) 姓名", "(B) 電話", "(C) 手機", "(D) 身高"], ans: 3 },
+            { id: 183, q: "建置 CRM 商業智慧，總公司不須提供各分店的輔助元素？", options: ["(A) 顧客知識庫", "(B) 商品知識庫", "(C) 促銷節慶商品組合", "(D) 總公司人事資料"], ans: 3 },
+            { id: 184, q: "行銷通路越長，不代表？", options: ["(A) 傳遞速度越慢", "(B) 商品鮮度越低", "(C) 流通成本越高", "(D) 商品價格越低"], ans: 3 },
+            { id: 185, q: "以下哪個不應該是百貨零售業門市銷售會遇到的問題？", options: ["(A) 客人看看就走", "(B) 過期商品依然上架販售", "(C) 如何讓客人多買商品", "(D) 買A商品會再買B商品"], ans: 1 },
+            { id: 186, q: "下列敘述何者不正確？", options: ["(A) 一般消費者購買便利品時會詳加比較價格品質才決定", "(B) 對特殊品有偏好會謹慎評估", "(C) 便利品採密集式分配", "(D) 特殊品可採獨家或選擇性分配"], ans: 0 },
+            { id: 187, q: "為顧客做商品裝袋服務的重點，下列何者為非？", options: ["(A) 放置於適合尺度的袋子", "(B) 小件放下層，大件放上層", "(C) 按照顧客指示裝袋", "(D) 不同性質商品分開裝袋"], ans: 1 },
+            { id: 188, q: "下列何者非共同採購之優點？", options: ["(A) 確保商品差異化", "(B) 大量採購降低成本", "(C) 提高連鎖店競爭力", "(D) 根據商品設定開發原始商品"], ans: 0 },
+            { id: 189, q: "關於零售管理「提供多樣化產品」的功能，以下哪個選項不符合？", options: ["(A) 阿瘦皮鞋販售多機能皮鞋", "(B) 特易購販售較大量且多元商品", "(C) 7-11 滿77元送 Hello Kitty 磁鐵", "(D) 頂好超市販售多種日用品"], ans: 2 },
+            { id: 190, q: "網路行銷商品經營顧客關係最常使用的方式為何？", options: ["(A) 電視媒體廣告", "(B) 與其他網站合作", "(C) 建立會員管理制度", "(D) 降低售價"], ans: 2 },
+            { id: 191, q: "為了方便顧客選購，商品陳列首要之務為何？", options: ["(A) 商品內容清楚易見", "(B) 商品特色一目了然", "(C) 商品排列展現氣勢", "(D) 商品上架容易安全"], ans: 1 },
+            { id: 192, q: "小孩跌倒可樂弄髒上衣，服務人員處理方式何者正確？", options: ["(A) 在旁觀看", "(B) 主動向前扶起並拿乾淨抹布協助擦淨", "(C) 問母親需不需要協助", "(D) 提供折價券"], ans: 1 },
+            { id: 193, q: "增加配送效率與和顧客做良性溝通，扮演了零售裡的哪種功能？", options: ["(A) 提供各色具備產品", "(B) 增加產品與顧客服務的價值", "(C) 提供顧客服務", "(D) 提供訊息給製造商"], ans: 1 },
+            { id: 194, q: "下列何者不屬於服務業的產品特性？", options: ["(A) 品質不易控制", "(B) 資本密集產業", "(C) 客人共同參與", "(D) 產品變異大"], ans: 1 },
+            { id: 195, q: "下列何種服務行為較能獲得顧客滿意？", options: ["(A) 差別待遇", "(B) 有條件接受更換商品", "(C) 體貼與關懷顧客的服務", "(D) 以自我為中心"], ans: 2 },
+            { id: 196, q: "連鎖店商圈規劃以何者為中心點？", options: ["(A) 門市所在點", "(B) 市中心", "(C) 主要商業區", "(D) 住宅區"], ans: 0 },
+            { id: 197, q: "當顧客知識比門市人員還豐富時，門市人員應如何應對？", options: ["(A) 避重就輕交談", "(B) 不懂裝懂交談", "(C) 表示敬意並反過來請教顧客", "(D) 說對不起我不清楚"], ans: 2 },
+            { id: 198, q: "下列何者不是培養長期顧客的措施？", options: ["(A) 委外經營", "(B) 顧客關係培養", "(C) 顧客情報提供", "(D) 新商品技術開發"], ans: 0 },
+            { id: 199, q: "下列何者不是營業額的構成要素？", options: ["(A) 店鋪集客數", "(B) 活動參與率", "(C) 顧客入店率", "(D) 購買率"], ans: 1 },
+            { id: 200, q: "下列何種方式可有效與顧客保持定期的聯絡？", options: ["(A) 留下公司電話請顧客自行聯絡", "(B) 請顧客寄意見表", "(C) 留下自己電話請顧客聯絡", "(D) 建立完整顧客資料檔方便聯絡"], ans: 3 },
+            { id: 201, q: "良好的顧客服務，下列敘述何者為誤？", options: ["(A) 真心服務", "(B) 讓顧客有購買壓力", "(C) 信守承諾", "(D) 價格可打折服務不打折"], ans: 1 },
+            { id: 202, q: "下列哪一項不是客訴事件的一般處理階段？", options: ["(A) 提出問題解決方法", "(B) 據理力爭以商店立場解釋", "(C) 傾聽顧客抱怨", "(D) 道歉並探討原因"], ans: 1 },
+            { id: 203, q: "處理顧客抱怨的方法下列何者為誤？", options: ["(A) 指責顧客不對", "(B) 選擇適當地點", "(C) 協助解決問題", "(D) 寫下筆記示尊重"], ans: 0 },
+            { id: 204, q: "將商品展示與消費者生活型態融合的做法，是依據何種觀點？", options: ["(A) 消費者需求導向", "(B) 空間利用導向", "(C) 商店銷售導向", "(D) 商店氣氛導向"], ans: 0 },
+            { id: 205, q: "員工素質為門市經營關鍵，下列何者非人力資源管理要項？", options: ["(A) 惜才", "(B) 育才", "(C) 選才", "(D) 用才及留才"], ans: 0 },
+            { id: 206, q: "近年企業重視以宅配將產品運送至消費者，屬何種管理策略？", options: ["(A) 生產策略", "(B) 財務策略", "(C) 通路策略", "(D) 人事策略"], ans: 2 },
+            { id: 207, q: "下列有關行銷觀念的敘述，何者錯誤？", options: ["(A) 利潤來自顧客滿足", "(B) 經營重點滿足需求", "(C) 方法為個別部門促銷", "(D) 由銷售觀念演進發展"], ans: 2 },
+            { id: 208, q: "最直接影響訂定價格的因素是：", options: ["(A) 定價目標", "(B) 成本", "(C) 顧客反應", "(D) 競爭"], ans: 1 },
+            { id: 209, q: "百貨業將某類貨品集中售價相同任意挑選，此種價格為：", options: ["(A) 習慣性價格", "(B) 劃一價格", "(C) 目標價格", "(D) 畸零價格"], ans: 1 },
+            { id: 210, q: "下列何者不是通路的功能？", options: ["(A) 便於接近顧客", "(B) 節省運輸成本", "(C) 抑制需求", "(D) 資訊流通"], ans: 2 },
+            { id: 211, q: "提供最高價值維持最佳滿意度持續改善服務品質稱為：", options: ["(A) 關係行銷", "(B) 目標行銷", "(C) 交易行銷", "(D) 觀念行銷"], ans: 0 },
+            { id: 212, q: "下列哪一種溝通方式所獲得的顧客回饋最為直接？", options: ["(A) 廣告溝通", "(B) 人員溝通", "(C) 直接郵件", "(D) 網路"], ans: 1 },
+            { id: 213, q: "當展售會遇到提出反對意見的顧客時，銷售人員不應：", options: ["(A) 認真傾聽意見", "(B) 誠懇回答問題", "(C) 化解顧客疑慮", "(D) 與顧客爭辯產品優點"], ans: 3 },
+            { id: 214, q: "相較之下，下列何者不可能是銷售人員尋找潛在顧客的方法？", options: ["(A) 從供應商獲取名單", "(B) 向現有顧客徵詢", "(C) 利用電話追蹤", "(D) 從競爭對手處取得名單"], ans: 3 },
+            { id: 215, q: "公司經由傳統行銷組合服務顧客的經常性工作稱為：", options: ["(A) 內部行銷", "(B) 外部行銷", "(C) 互動行銷", "(D) 關係行銷"], ans: 1 },
+            { id: 216, q: "以下何者是21世紀兼顧顧客需求和成本優勢的製造技術？", options: ["(A) 彈性製造系統", "(B) 電腦整合製造", "(C) 及時存貨系統", "(D) 以上皆是"], ans: 3 },
+            { id: 217, q: "主動服務顧客之技巧，下列何者為非？", options: ["(A) 不用等顧客要求準備好下個步驟", "(B) 做出正確適當回應", "(C) 隨時找尋服務機會", "(D) 不斷督促顧客購買商品"], ans: 3 },
+            { id: 218, q: "處理顧客抱怨的目標何者為非？", options: ["(A) 找出癥結作為改進參考", "(B) 視重要程度再安排解決", "(C) 檢討改善避免再度發生", "(D) 得到顧客再度的信賴"], ans: 1 },
+            { id: 219, q: "如何能先知先覺的彌補或改善顧客不滿意的問題？", options: ["(A) 設置免費服務電話", "(B) 事先顧客滿意度瞭解或調查", "(C) 設置意見箱", "(D) 設置顧客服務部"], ans: 1 },
+            { id: 220, q: "接聽電話應對時，要先：", options: ["(A) 等待對方先講話", "(B) 報上店名與問候語", "(C) 確認對方身分", "(D) 重複一次要點"], ans: 1 },
+            { id: 221, q: "零售商在行銷通路所扮演的角色為何？", options: ["(A) 增加產品和服務的價值", "(B) 掌握學習曲線效應", "(C) 公平交易", "(D) 風險承擔"], ans: 0 },
+            { id: 222, q: "下列何者不是顧客抱怨的三階段處理方式？", options: ["(A) 理解發怒情緒", "(B) 說明公司規定並堅定立場以公司利益為最高目標", "(C) 確認事實妥善處理", "(D) 感謝顧客指教"], ans: 1 },
+            { id: 223, q: "下列對顧客需求何者敘述正確？", options: ["(A) 價錢比別家便宜", "(B) 只看不買不用提供服務", "(C) 主要用微笑", "(D) 重視顧客服務，替顧客著想的服務表現"], ans: 3 },
+            { id: 224, q: "特價商品或具有價格優勢的商品，適合何種陳列方式？", options: ["(A) 量感陳列", "(B) 懸掛式陳列", "(C) 主題櫃陳列", "(D) 多媒體展示"], ans: 0 },
+            { id: 225, q: "下列何者非商店賣場空間活化的做法？", options: ["(A) 將強勢商品放在入口處方便拿取", "(B) 運用色彩照明突顯個性", "(C) 藉音響效果提升形象", "(D) 招牌設計統一"], ans: 0 },
+            { id: 226, q: "門市服務人員應該如何接待快打烊才來的顧客？", options: ["(A) 當面進行打烊作業", "(B) 表現急躁不安", "(C) 告知快打烊請欲購從速", "(D) 安撫顧客讓顧客心情平穩慢慢選購"], ans: 3 },
+            { id: 227, q: "改善門市服務品質的時機是在什麼時候？", options: ["(A) 發現顧客不滿意時", "(B) 處理抱怨以後", "(C) 每天且持續性的活動", "(D) 店長發現品質下降時"], ans: 2 },
+            { id: 228, q: "為確保商品品質，下列何項作業為正確？", options: ["(A) 冷藏飲料可放入溫罐器販賣", "(B) 溫罐器內超過48小時取出後不可再冷藏以免變質", "(C) 冷藏改冷凍可延長六個月", "(D) 解凍過商品可再冷凍販賣"], ans: 1 },
+            { id: 229, q: "下列何者非 POS 系統的功能？", options: ["(A) 防止人為舞弊", "(B) 蒐集商品資訊", "(C) 增加重複作業", "(D) 強化採購管理"], ans: 2 },
+            { id: 230, q: "有關庫存管理之意義，下列何者為誤？", options: ["(A) 求存量與訂貨次數之均衡", "(B) 提高生產力與銷貨利益", "(C) 保持適當存量", "(D) 增加資金的積壓"], ans: 3 },
+            { id: 231, q: "下列針對零售之定義描述何項為非？", options: ["(A) 銷售對象為最終消費者", "(B) 零售不包括無形的產品", "(C) 可藉無店舖方式銷售", "(D) 零售工作不一定由零售商做"], ans: 1 },
+            { id: 232, q: "顧客透過「意見卡」表達不滿，處理程序順序應是？(1.討論解法 2.向顧客了解狀況 3.安撫情緒 4.告知處理方式)", options: ["(A) 2-1-3-4", "(B) 2-3-1-4", "(C) 3-2-1-4", "(D) 3-1-2-4"], ans: 1 },
+            { id: 233, q: "零售商在行銷通路上可能扮演的角色，以下何者為非？", options: ["(A) 決定商品行銷的媒體組合", "(B) 將產品數量由大化小", "(C) 增加產品與服務價值", "(D) 提供消費資訊給製造商"], ans: 0 },
+            { id: 234, q: "下列有關於零售業態的特色何者有誤？", options: ["(A) 零售業以販售商品予中間商為目的", "(B) 以販售商品予消費者為目的", "(C) 是重要經濟指標", "(D) 應以顧客需求為策略"], ans: 0 },
+            { id: 235, q: "由總部百分百投資經營管理稱為：", options: ["(A) 直營", "(B) 特許加盟", "(C) 志願加盟", "(D) 個人商店"], ans: 0 },
+            { id: 236, q: "當顧客要買的商品賣完時，如何應對才能避免抱怨？", options: ["(A) 直接說賣完", "(B) 立刻查詢何時進貨並請屆時再來", "(C) 說明銷路太好缺貨", "(D) 請顧客到別家買"], ans: 1 },
+            { id: 237, q: "顧客進入商店後東張西望好像在找東西，人員應如何應對？", options: ["(A) 不予理會", "(B) 暗中注意", "(C) 親切上前詢問顧客需要什麼", "(D) 只說歡迎光臨"], ans: 2 },
+            { id: 238, q: "連鎖加盟店建立一致性品質之 3S 原則，不包括下列哪一項？", options: ["(A) 簡單化 (Simplification)", "(B) 同步化 (Synchronization)", "(C) 標準化 (Standardization)", "(D) 專業化 (Specialization)"], ans: 1 },
+            { id: 239, q: "擬增加店舖明亮度，下列何者不是清潔的重點？", options: ["(A) 照明設備清潔與使用年限", "(B) 店外招牌面材定期更換", "(C) 地板清潔與更換", "(D) 貨架定期清潔與更換"], ans: 3 },
+            { id: 240, q: "下列何者不是商品進貨驗收的重點？", options: ["(A) 商品數量", "(B) 先進先出", "(C) 外包裝完整", "(D) 有效期限"], ans: 1 },
+            { id: 241, q: "如何使閒逛型顧客自動購買商品或留下良好印象，何者不正確？", options: ["(A) 精心設計店面與親切態度", "(B) 探詢潛在需要介紹適當商品", "(C) 請顧客務必留下資料以供推薦", "(D) 主動攀談適時轉到商品"], ans: 2 },
+            { id: 242, q: "對顧客保持長期關注創造「顧客終生價值」的行銷方式稱為：", options: ["(A) 關係行銷", "(B) 內部行銷", "(C) 互動行銷", "(D) 滿意行銷"], ans: 0 },
+            { id: 243, q: "網路行銷組合 4Cs 是指：", options: ["(A) 顧客需求、配銷、便利、溝通", "(B) 顧客需求、成本、便利、客製化", "(C) 顧客需求、成本、便利、溝通", "(D) 顧客需求、成本、物流、溝通"], ans: 2 },
+            { id: 244, q: "行銷的主要利潤來自：", options: ["(A) 產量的增加", "(B) 顧客的滿足", "(C) 銷量的增加", "(D) 成本的減少"], ans: 1 },
+            { id: 245, q: "可配合顧客個別狀況隨機應變的推廣活動為：", options: ["(A) 宣傳報導", "(B) 廣告", "(C) 人員推銷", "(D) 促銷"], ans: 2 },
+            { id: 246, q: "成本領導策略在下列何種情況最為適合？", options: ["(A) 議價力低進入障礙高", "(B) 規模經濟不重要", "(C) 不同顧客有不同需求", "(D) 同行高度競爭、顧客對價格敏感"], ans: 3 },
+            { id: 247, q: "「顧客第一」、「麥當勞都是為您」等口號屬於何種導向？", options: ["(A) 生產導向", "(B) 銷售導向", "(C) 行銷導向", "(D) 社會行銷導向"], ans: 2 },
+            { id: 248, q: "4P 所對應的 4Cs 顧客利益是指下列哪四項？", options: ["(A) 需求、成本、便利、體貼", "(B) 需求、成本、體貼、溝通", "(C) 需求、體貼、便利、溝通", "(D) 顧客需求、顧客成本、便利、溝通"], ans: 3 },
+            { id: 249, q: "傳統 4P 行銷組合包含產品、價格、促銷以及哪一項？", options: ["(A) 技術", "(B) 運輸", "(C) 資訊", "(D) 通路"], ans: 3 },
+            { id: 250, q: "公司對員工訓練與激勵工作以提供更好服務，這是一種：", options: ["(A) 互動行銷", "(B) 外部行銷", "(C) 內部行銷", "(D) 交叉行銷"], ans: 2 },
+            { id: 251, q: "行銷組合所形成的行銷活動系統是以何者為中心？", options: ["(A) 消費者", "(B) 生產者", "(C) 行銷者", "(D) 勞動者"], ans: 0 },
+            { id: 252, q: "下列有關目前大型量販店的敘述何者正確？", options: ["(A) 提供即時顧客服務為主", "(B) 店面發展以加盟為主", "(C) 擁有長時間經營優勢", "(D) 能有效縮短商品的通路流程"], ans: 3 },
+            { id: 253, q: "比較銷售觀念和行銷觀念的不同，下列敘述何者有誤？", options: ["(A) 行銷觀念目的是滿足顧客需求", "(B) 銷售觀念目的是經由銷售獲利", "(C) 行銷觀念的方法是大量廣告與強勢推廣", "(D) 銷售觀念的方法是銷售與促銷"], ans: 2 },
+            { id: 254, q: "有效結合運輸、倉儲、包裝、流通加工等機能性活動屬於 4 流中的：", options: ["(A) 商流", "(B) 物流", "(C) 資訊流", "(D) 金流"], ans: 1 },
+            { id: 255, q: "百貨公司將部門分為少女、淑女、男仕服飾等，是何種劃分方式？", options: ["(A) 直線別", "(B) 功能別", "(C) 顧客別", "(D) 通路別"], ans: 2 },
+            { id: 256, q: "有關量販店的敘述，何者為非？", options: ["(A) 是強調低價的業態", "(B) 藉由高毛利、低週轉率的方式獲利", "(C) 促銷活動相對百貨較少", "(D) 採完全自助式服務"], ans: 1 },
+            { id: 257, q: "提供新的服務或產品給現有市場客戶的行銷策略為：", options: ["(A) 市場滲透策略", "(B) 市場發展策略", "(C) 產品發展策略", "(D) 多角化策略"], ans: 2 },
+            { id: 258, q: "波士頓企管顧問公司發展之 BCG 矩陣以哪二項為分析基礎？", options: ["(A) 新舊顧客與需求", "(B) 市場與產品", "(C) 市場佔有率與市場成長率", "(D) 顧客與滿意度"], ans: 2 },
+            { id: 259, q: "波特五力分析包含現有競爭者、替代品、顧客、供應商與？", options: ["(A) 經濟成長", "(B) 潛在競爭者", "(C) 科技進步", "(D) 政府法規"], ans: 1 },
+            { id: 260, q: "下列敘述何者錯誤？", options: ["(A) 銷售觀念以企業利益為前提", "(B) 行銷管理實現目標交易量", "(C) 目標行銷含區隔、選擇、定位", "(D) 若競爭者採無差異行銷時公司適合採無差異行銷"], ans: 3 },
+            { id: 261, q: "雙方提供類似產品服務滿足相同目標市場的競爭方式是：", options: ["(A) 直接競爭", "(B) 潛在競爭", "(C) 購買競爭", "(D) 議價競爭"], ans: 0 },
+            { id: 262, q: "增加現有顧客對現有產品購買量以提升市佔率稱為：", options: ["(A) 市場發展策略", "(B) 市場滲透策略", "(C) 產品發展策略", "(D) 多角化策略"], ans: 1 },
+            { id: 263, q: "企業針對廣大群眾建立並維持良好關係的努力屬於推廣組合中的：", options: ["(A) 廣告", "(B) 人員銷售", "(C) 公共關係", "(D) 銷售促銷"], ans: 2 },
+            { id: 264, q: "3C產品剛推出時訂價極高，隨著銷量下降逐漸調降價格，屬於何種策略？", options: ["(A) 滲透定價", "(B) 吸脂定價", "(C) 尖峰定價", "(D) 成本加成"], ans: 1 },
+            { id: 265, q: "在企業利潤、消費者效用與社會福祉中取得平衡屬於何種觀點？", options: ["(A) 生產觀點", "(B) 行銷觀點", "(C) 社會行銷觀點", "(D) 銷售觀點"], ans: 2 },
+            { id: 266, q: "進行市場調查研究行為從滿足需求獲得利潤屬於何種觀點？", options: ["(A) 生產觀點", "(B) 產品觀點", "(C) 行銷觀點", "(D) 銷售觀點"], ans: 2 },
+            { id: 267, q: "在門市中經手之顧客資料應如何處理？", options: ["(A) 必須保密", "(B) 可攜出參考", "(C) 出售給名單公司", "(D) 拿來算命"], ans: 0 },
+            { id: 268, q: "收銀櫃檯陳列小體積便宜商品是利用顧客何種心態？", options: ["(A) 順便買", "(B) 貪便宜", "(C) 衝動性購買", "(D) 怕買不到"], ans: 2 },
+            { id: 269, q: "綠色企業具備之特質何者為非？", options: ["(A) 積極主動的", "(B) 短期導向的", "(C) 全球關懷的", "(D) 關注於自然環境"], ans: 1 },
+            { id: 270, q: "顧客抱怨是商店的什麼？", options: ["(A) 機會", "(B) 威脅", "(C) 失敗", "(D) 災難"], ans: 0 },
+            { id: 271, q: "正在接待顧客時電話響起，應如何應對？", options: ["(A) 說明後簡單扼要交談或事後回電", "(B) 側身自然交談", "(C) 旁若無人交談", "(D) 不接電話"], ans: 0 },
+            { id: 272, q: "如何塑造專業客服中心形象，下列敘述何者為誤？", options: ["(A) 制定標準化程序", "(B) 搭配感同身受同理心", "(C) 單一化服務，對個案不能彈性授權", "(D) 堅持品質正確性與一致性"], ans: 2 },
+            { id: 273, q: "門市人員介紹商品促使購買，下列何者為誤？", options: ["(A) 詳細介紹特點", "(B) 讓顧客實際試用", "(C) 拿出所需商品供挑選", "(D) 強力推銷"], ans: 3 },
+            { id: 274, q: "顧客詢問商品位置，人員如何應對能獲得良好印象？", options: ["(A) 指著方向說在那裡", "(B) 對顧客說在那裡請跟我來並帶領前往", "(C) 用手指陳列方向", "(D) 請循標示牌找"], ans: 1 },
+            { id: 275, q: "每一個行銷人員心中的金石玉律為何？", options: ["(A) 商品品質", "(B) 顧客滿意", "(C) 銷售業績", "(D) 行銷策略"], ans: 1 },
+            { id: 276, q: "透過生活型態情境溝通進行說服性溝通屬於：", options: ["(A) 事件行銷", "(B) 置入性行銷", "(C) 利基行銷", "(D) 集中行銷"], ans: 1 },
+            { id: 277, q: "下列何種商品群必須具備齊全性、豐富性與新鮮感？", options: ["(A) 補助商品", "(B) 附屬商品", "(C) 刺激商品", "(D) 主力商品"], ans: 3 },
+            { id: 278, q: "商品具有「正字標記」代表：", options: ["(A) 符合國家標準", "(B) 特許發行產品", "(C) 素食產品", "(D) 肉類產品"], ans: 0 },
+            { id: 279, q: "專賣店經營成功的關鍵因素為何？", options: ["(A) 店面布置與商品文化結合", "(B) 充實專業知識", "(C) 慎選販賣商品", "(D) 以上皆是"], ans: 3 },
+            { id: 280, q: "商品具有流行性與多樣性、價位較高且精緻化的是：", options: ["(A) 超市", "(B) 百貨公司", "(C) 量販店", "(D) 專賣店"], ans: 1 },
+            { id: 281, q: "廣告分類直接獲取經濟利益包含告知廣告及：", options: ["(A) 提醒性與自我性廣告", "(B) 印象性與說服性廣告", "(C) 印象性與強迫性廣告", "(D) 說服性廣告及提醒性廣告"], ans: 3 },
+            { id: 282, q: "心理定價法中，下列何者屬於畸零定價法？", options: ["(A) 提高進口車價格", "(B) 流行商品定高價", "(C) 晚餐 299 元", "(D) 分期付款"], ans: 2 },
+            { id: 283, q: "剛上市的商品在產品生命週期中屬於哪一期？", options: ["(A) 導入期", "(B) 成長期", "(C) 成熟期", "(D) 飽和期"], ans: 0 },
+            { id: 284, q: "電腦中毒請維修人員來檢修，屬於零售業何種功能？", options: ["(A) 分裝商品便利購買", "(B) 售後服務", "(C) 提供多種類商品", "(D) 分擔生產者風險"], ans: 1 },
+            { id: 285, q: "下列何者屬於零階通路的商業模式？", options: ["(A) 電視購物頻道", "(B) 信用卡型錄郵購", "(C) 連鎖 3C 賣場", "(D) 觀光果園"], ans: 3 },
+            { id: 286, q: "下列有關現代化商業機能的敘述，何者不正確？", options: ["(A) 資訊流是資訊的流通", "(B) 物流是商品的流通", "(C) 商流是商品的流通", "(D) 金流是資金的流通"], ans: 2 },
+            { id: 287, q: "促進交易進行除了商流、物流、金流外，還需透過哪種主要流程？", options: ["(A) 時間流", "(B) 技術流", "(C) 資訊流", "(D) 人才流"], ans: 2 },
+            { id: 288, q: "服飾店進行換季大拍賣是因為商品減少了：", options: ["(A) 占有效用", "(B) 空間效用", "(C) 時間效用", "(D) 形式效用"], ans: 2 },
+            { id: 289, q: "以下何者無法直接有效提升門市銷售業績？", options: ["(A) 每顧客增加購買數", "(B) 每日增加成交數", "(C) 銷售訓練與知識庫", "(D) 進貨庫存盤點"], ans: 3 },
+            { id: 290, q: "電視、冰箱、冷氣等產品是屬於：", options: ["(A) 便利品", "(B) 特殊品", "(C) 耐久性消費品", "(D) 非耐久性消費品"], ans: 2 },
+            { id: 291, q: "下列哪一個產品之特質不適合採行多層次傳銷方式經營？", options: ["(A) 健康美容類產品", "(B) 工業用品", "(C) 產品具獨特性", "(D) 時常需重複消費"], ans: 1 },
+            { id: 292, q: "未來商業發展傾向數位整合，下列何者不是 3C 的內容？", options: ["(A) 消費性電子 (Consumer Electronics)", "(B) 通訊 (Communication)", "(C) 電腦 (Computer)", "(D) 通路 (Channel)"], ans: 3 },
+            { id: 293, q: "當面臨何種市場敏感度時，降價措施對銷售成長較為有利？", options: ["(A) 需求的價格彈性高", "(B) 需求的價格彈性低", "(C) 消費的需求彈性高", "(D) 消費的需求彈性低"], ans: 0 },
+            { id: 294, q: "有效市場區隔的條件為：", options: ["(A) 可衡量性、可接近性、足量性、可執行性", "(B) 差異性、無差異性、集中性、分散性", "(C) 生產性、消費性、顧客性、財務性", "(D) 需要性、動機性、認知性、執行性"], ans: 0 },
+            { id: 295, q: "下列何者不屬於直銷業的特點？", options: ["(A) 直銷業為零售業", "(B) 直銷業為批發業", "(C) 採人員直銷", "(D) 以消費性商品或勞務為主"], ans: 1 },
+            { id: 296, q: "何者較適用高價策略？", options: ["(A) 擁有專利權的產品", "(B) 原料充足的產品", "(C) 生產者眾多的產品", "(D) 需求彈性高的產品"], ans: 0 },
+            { id: 297, q: "電子商務對行銷理論與實務的影響為：", options: ["(A) 使價格改變更快速", "(B) 中間商的減少", "(C) 消費者容易得到競爭產品資訊", "(D) 以上皆是"], ans: 3 },
+            { id: 298, q: "有關「產品」的真義，下列何者為非？", options: ["(A) 花錢購買主要不是實體而是帶給人的利益", "(B) 滿足消費者需求的是有形產品", "(C) 產品包含有形物品與無形勞務及價值", "(D) 人、地方、活動、組織皆為產品"], ans: 1 },
+            { id: 299, q: "下列何者不是行銷組合中之 4P 行銷活動？", options: ["(A) 產品組合 (Product)", "(B) 通路組合 (Place)", "(C) 消費者 (People)", "(D) 訂價組合 (Price)"], ans: 2 },
+            { id: 300, q: "企業藉由推銷員通過「工廠 → 批發商 → 零售商 → 消費者」路線推銷產品謂之：", options: ["(A) 拉式策略", "(B) 推式策略", "(C) 傳式策略", "(D) 廣式策略"], ans: 1 }
+        ];
+
+        /**
+         * 應用程式主邏輯 App Controller
+         */
+        class CRMQuizApp {
+            constructor() {
+                this.bank = QUESTION_BANK;
+                this.mode = 'home'; // 'home' | 'sequential' | 'exam' | 'wrong' | 'bookmarks'
+                this.activeQuestions = [];
+                this.currentIndex = 0;
+                this.userAnswers = {}; // { qId: optionIndex }
+                this.revealedState = {}; // { qId: boolean }
+
+                // LocalStorage state
+                this.bookmarks = new Set(JSON.parse(localStorage.getItem('crm_bookmarks') || '[]'));
+                this.wrongRecords = JSON.parse(localStorage.getItem('crm_wrong_records') || '{}'); // { qId: count }
+                this.seqProgressIndex = parseInt(localStorage.getItem('crm_seq_index') || '0');
+                this.highScore = localStorage.getItem('crm_high_score') || null;
+
+                // Practice options
+                this.showInstantAnswer = true;
+
+                // Exam timer
+                this.timerInterval = null;
+                this.timeRemaining = 3600; // 60 mins in seconds
+                this.timeSpent = 0;
+
+                // Results review filter
+                this.resultReviewFilter = 'all';
+
+                this.initApp();
+            }
+
+            initApp() {
+                this.updateHeaderStats();
+                this.bindKeyboardShortcuts();
+                this.showHome();
+            }
+
+            // --- LOCAL STORAGE HELPERS ---
+            saveBookmarks() {
+                localStorage.setItem('crm_bookmarks', JSON.stringify(Array.from(this.bookmarks)));
+                this.updateHeaderStats();
+            }
+
+            saveWrongRecords() {
+                localStorage.setItem('crm_wrong_records', JSON.stringify(this.wrongRecords));
+                this.updateHeaderStats();
+            }
+
+            saveSeqProgress(idx) {
+                this.seqProgressIndex = idx;
+                localStorage.setItem('crm_seq_index', idx.toString());
+                document.getElementById('home-seq-progress').textContent = idx + 1;
+            }
+
+            saveHighScore(score) {
+                if (!this.highScore || score > parseInt(this.highScore)) {
+                    this.highScore = score;
+                    localStorage.setItem('crm_high_score', score.toString());
+                }
+                this.updateHeaderStats();
+            }
+
+            updateHeaderStats() {
+                document.getElementById('header-fav-count').textContent = this.bookmarks.size;
+                document.getElementById('header-wrong-count').textContent = Object.keys(this.wrongRecords).length;
+                document.getElementById('header-high-score').textContent = this.highScore ? `${this.highScore}分` : '--';
+
+                document.getElementById('home-fav-count-text').textContent = `${this.bookmarks.size} 題`;
+                document.getElementById('home-wrong-count-text').textContent = `${Object.keys(this.wrongRecords).length} 題`;
+                document.getElementById('home-high-score-text').textContent = this.highScore ? `${this.highScore} 分` : '無紀錄';
+                document.getElementById('home-seq-progress').textContent = Math.min(this.seqProgressIndex + 1, 300);
+            }
+
+            // --- NAVIGATION & VIEWS ---
+            hideAllViews() {
+                document.getElementById('view-home').classList.add('hidden');
+                document.getElementById('view-quiz').classList.add('hidden');
+                document.getElementById('view-result').classList.add('hidden');
+                if (this.timerInterval) clearInterval(this.timerInterval);
+            }
+
+            showHome() {
+                this.hideAllViews();
+                document.getElementById('view-home').classList.remove('hidden');
+                this.updateHeaderStats();
+            }
+
+            // --- MODE STARTERS ---
+            startSequentialMode() {
+                this.mode = 'sequential';
+                this.activeQuestions = [...this.bank];
+                this.currentIndex = Math.min(this.seqProgressIndex, this.bank.length - 1);
+                this.userAnswers = {};
+                this.revealedState = {};
+                this.setupQuizUI('順序練習模式', false);
+            }
+
+            startExamMode() {
+                this.mode = 'exam';
+                // Pick 50 random unique questions
+                const shuffled = [...this.bank].sort(() => 0.5 - Math.random());
+                this.activeQuestions = shuffled.slice(0, 50);
+                this.currentIndex = 0;
+                this.userAnswers = {};
+                this.revealedState = {};
+
+                // Start Timer 60 minutes
+                this.timeRemaining = 3600;
+                this.timeSpent = 0;
+                this.startExamTimer();
+
+                this.setupQuizUI('模擬檢定考試 (50題)', true);
+            }
+
+            startWrongMode() {
+                const wrongIds = Object.keys(this.wrongRecords).map(Number);
+                if (wrongIds.length === 0) {
+                    this.showCustomAlert('訊息提示', '目前尚無答錯題目紀錄，請先進行順序練習或模擬檢定。');
+                    return;
+                }
+                this.mode = 'wrong';
+                this.activeQuestions = this.bank.filter(q => wrongIds.includes(q.id));
+                this.currentIndex = 0;
+                this.userAnswers = {};
+                this.revealedState = {};
+                this.setupQuizUI(`錯題專區 (${this.activeQuestions.length}題)`, false);
+            }
+
+            startBookmarkMode() {
+                const favIds = Array.from(this.bookmarks);
+                if (favIds.length === 0) {
+                    this.showCustomAlert('訊息提示', '目前尚未收藏任何題目。答題時點擊星號即可收藏。');
+                    return;
+                }
+                this.mode = 'bookmarks';
+                this.activeQuestions = this.bank.filter(q => favIds.includes(q.id));
+                this.currentIndex = 0;
+                this.userAnswers = {};
+                this.revealedState = {};
+                this.setupQuizUI(`收藏難題庫 (${this.activeQuestions.length}題)`, false);
+            }
+
+            setupQuizUI(titleText, isExam) {
+                this.hideAllViews();
+                document.getElementById('view-quiz').classList.remove('hidden');
+
+                // UI Badges & Buttons setup
+                const badge = document.getElementById('quiz-mode-badge');
+                badge.textContent = titleText;
+
+                const timerContainer = document.getElementById('quiz-timer-container');
+                const instantBtn = document.getElementById('btn-toggle-instant');
+                const submitBtn = document.getElementById('btn-submit-exam');
+                const revealBtn = document.getElementById('btn-toggle-reveal');
+
+                if (isExam) {
+                    timerContainer.classList.remove('hidden');
+                    instantBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                    revealBtn.classList.add('hidden');
+                } else {
+                    timerContainer.classList.add('hidden');
+                    instantBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                    revealBtn.classList.remove('hidden');
+                }
+
+                document.getElementById('quiz-total-num').textContent = this.activeQuestions.length;
+                this.renderQuestion();
+            }
+
+            startExamTimer() {
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                const timerDisplay = document.getElementById('quiz-timer-display');
+
+                this.timerInterval = setInterval(() => {
+                    this.timeRemaining--;
+                    this.timeSpent++;
+
+                    const mins = Math.floor(this.timeRemaining / 60);
+                    const secs = this.timeRemaining % 60;
+                    timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+                    if (this.timeRemaining <= 0) {
+                        clearInterval(this.timerInterval);
+                        this.showCustomAlert('時間到！', '考試時間 60 分鐘已結束，系統將自動為您交卷。', () => {
+                            this.submitExam();
+                        });
+                    }
+                }, 1000);
+            }
+
+            // --- QUESTION RENDER LOGIC ---
+            renderQuestion() {
+                const q = this.activeQuestions[this.currentIndex];
+                if (!q) return;
+
+                if (this.mode === 'sequential') {
+                    this.saveSeqProgress(this.currentIndex);
+                }
+
+                // Update Header
+                document.getElementById('quiz-current-num').textContent = this.currentIndex + 1;
+                document.getElementById('question-id-tag').textContent = `題號 #${q.id}`;
+
+                // Update Progress bar
+                const pct = ((this.currentIndex + 1) / this.activeQuestions.length) * 100;
+                document.getElementById('quiz-progress-bar').style.width = `${pct}%`;
+
+                // Title
+                document.getElementById('question-text').textContent = q.q;
+
+                // Answered status tag
+                const statusTag = document.getElementById('question-answered-status');
+                const userAnswer = this.userAnswers[q.id];
+                if (userAnswer !== undefined) {
+                    statusTag.textContent = "已作答";
+                    statusTag.className = "text-emerald-400 font-semibold";
+                } else {
+                    statusTag.textContent = "未作答";
+                    statusTag.className = "text-slate-400";
+                }
+
+                // Favorite Star Icon
+                const starIcon = document.getElementById('bookmark-star-icon');
+                if (this.bookmarks.has(q.id)) {
+                    starIcon.className = "fa-solid fa-star text-amber-400";
+                } else {
+                    starIcon.className = "fa-regular fa-star text-slate-400";
+                }
+
+                // Options Container
+                const container = document.getElementById('options-container');
+                container.innerHTML = '';
+
+                const isExam = this.mode === 'exam';
+                const isRevealed = this.revealedState[q.id] || (!isExam && this.showInstantAnswer && userAnswer !== undefined);
+
+                q.options.forEach((optText, optIdx) => {
+                    const optBtn = document.createElement('button');
+                    optBtn.className = `w-full text-left p-4 rounded-xl border transition flex items-center justify-between group text-sm sm:text-base font-medium `;
+
+                    let btnStyle = "bg-slate-900/60 border-slate-700 hover:border-blue-500/60 hover:bg-slate-800 text-slate-200";
+                    let badgeStyle = "bg-slate-800 text-slate-400 group-hover:bg-blue-500 group-hover:text-white";
+                    let iconHTML = '';
+
+                    if (userAnswer === optIdx) {
+                        btnStyle = "bg-blue-600/20 border-blue-500 text-white font-semibold shadow-lg shadow-blue-500/10";
+                        badgeStyle = "bg-blue-600 text-white";
+                        iconHTML = `<i class="fa-solid fa-circle-check text-blue-400 text-lg"></i>`;
+                    }
+
+                    // Reveal Feedback if checked
+                    if (isRevealed) {
+                        if (optIdx === q.ans) {
+                            btnStyle = "bg-emerald-600/20 border-emerald-500 text-emerald-200 font-bold shadow-lg shadow-emerald-500/10";
+                            badgeStyle = "bg-emerald-600 text-white";
+                            iconHTML = `<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>`;
+                        } else if (userAnswer === optIdx && optIdx !== q.ans) {
+                            btnStyle = "bg-rose-600/20 border-rose-500 text-rose-200 font-bold shadow-lg shadow-rose-500/10";
+                            badgeStyle = "bg-rose-600 text-white";
+                            iconHTML = `<i class="fa-solid fa-circle-xmark text-rose-400 text-lg"></i>`;
+                        }
+                    }
+
+                    optBtn.className = `w-full text-left p-4 rounded-xl border transition flex items-center justify-between group text-sm sm:text-base ${btnStyle}`;
+
+                    const letters = ["A", "B", "C", "D"];
+                    optBtn.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg ${badgeStyle} flex items-center justify-center font-bold text-xs shrink-0 transition">
+                                ${letters[optIdx]}
+                            </span>
+                            <span class="leading-relaxed">${optText}</span>
+                        </div>
+                        <div class="shrink-0 ml-2">
+                            ${iconHTML}
+                        </div>
+                    `;
+
+                    optBtn.onclick = () => this.selectOption(optIdx);
+                    container.appendChild(optBtn);
+                });
+
+                // Explanation Box
+                const expBox = document.getElementById('explanation-box');
+                if (isRevealed) {
+                    expBox.classList.remove('hidden');
+                    const letters = ["A", "B", "C", "D"];
+                    document.getElementById('correct-answer-text').textContent = `${letters[q.ans]} - ${q.options[q.ans]}`;
+                } else {
+                    expBox.classList.add('hidden');
+                }
+            }
+
+            selectOption(optIdx) {
+                const q = this.activeQuestions[this.currentIndex];
+                this.userAnswers[q.id] = optIdx;
+
+                // Track wrong record immediately in practice
+                if (optIdx !== q.ans) {
+                    this.wrongRecords[q.id] = (this.wrongRecords[q.id] || 0) + 1;
+                    this.saveWrongRecords();
+                }
+
+                this.renderQuestion();
+            }
+
+            prevQuestion() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.renderQuestion();
+                }
+            }
+
+            nextQuestion() {
+                if (this.currentIndex < this.activeQuestions.length - 1) {
+                    this.currentIndex++;
+                    this.renderQuestion();
+                } else {
+                    if (this.mode === 'exam') {
+                        this.confirmSubmitExam();
+                    } else {
+                        this.showCustomAlert('練習結束', '您已完成本次題庫的所有練習！', () => {
+                            this.showHome();
+                        });
+                    }
+                }
+            }
+
+            toggleInstantAnswer() {
+                this.showInstantAnswer = !this.showInstantAnswer;
+                document.getElementById('instant-answer-status').textContent = `即時解析: ${this.showInstantAnswer ? '開啟' : '關閉'}`;
+                this.renderQuestion();
+            }
+
+            toggleRevealAnswerManual() {
+                const q = this.activeQuestions[this.currentIndex];
+                this.revealedState[q.id] = !this.revealedState[q.id];
+                this.renderQuestion();
+            }
+
+            toggleBookmarkCurrent() {
+                const q = this.activeQuestions[this.currentIndex];
+                if (this.bookmarks.has(q.id)) {
+                    this.bookmarks.delete(q.id);
+                } else {
+                    this.bookmarks.add(q.id);
+                }
+                this.saveBookmarks();
+                this.renderQuestion();
+            }
+
+            // --- EXAM SUBMISSION & RESULTS ---
+            confirmSubmitExam() {
+                const unansweredCount = this.activeQuestions.filter(q => this.userAnswers[q.id] === undefined).length;
+                let msg = '確定要交卷結算本次模擬檢定成績嗎？';
+                if (unansweredCount > 0) {
+                    msg = `您尚有 ${unansweredCount} 題未作答！確定要交卷嗎？`;
+                }
+                this.showCustomConfirm('交卷確認', msg, () => {
+                    this.submitExam();
+                });
+            }
+
+            submitExam() {
+                if (this.timerInterval) clearInterval(this.timerInterval);
+
+                let correctCount = 0;
+                let wrongCount = 0;
+
+                this.activeQuestions.forEach(q => {
+                    const userAns = this.userAnswers[q.id];
+                    if (userAns === q.ans) {
+                        correctCount++;
+                    } else {
+                        wrongCount++;
+                        this.wrongRecords[q.id] = (this.wrongRecords[q.id] || 0) + 1;
+                    }
+                });
+
+                this.saveWrongRecords();
+
+                const totalQuestions = this.activeQuestions.length;
+                const score = Math.round((correctCount / totalQuestions) * 100);
+                const isPass = score >= 70;
+
+                this.saveHighScore(score);
+
+                // Hide Quiz, Show Results
+                this.hideAllViews();
+                document.getElementById('view-result').classList.remove('hidden');
+
+                // Render Score
+                document.getElementById('result-score-val').textContent = score;
+                document.getElementById('result-correct-count').textContent = `${correctCount} 題`;
+                document.getElementById('result-wrong-count').textContent = `${wrongCount} 題`;
+                document.getElementById('result-accuracy').textContent = `${Math.round((correctCount / totalQuestions) * 100)}%`;
+
+                const mins = Math.floor(this.timeSpent / 60);
+                const secs = this.timeSpent % 60;
+                document.getElementById('result-time-spent').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+                // Render Stamp
+                const stamp = document.getElementById('result-stamp');
+                const stampIcon = document.getElementById('result-stamp-icon');
+                const stampText = document.getElementById('result-stamp-text');
+
+                if (isPass) {
+                    stamp.className = "mt-4 px-6 py-2 rounded-xl text-lg font-extrabold uppercase tracking-widest inline-flex items-center gap-2 border-2 border-emerald-500 bg-emerald-500/10 text-emerald-400";
+                    stampIcon.className = "fa-solid fa-trophy text-emerald-400";
+                    stampText.textContent = "合格 PASS";
+                    // Confetti celebration
+                    if (typeof confetti === 'function') {
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else {
+                    stamp.className = "mt-4 px-6 py-2 rounded-xl text-lg font-extrabold uppercase tracking-widest inline-flex items-center gap-2 border-2 border-rose-500 bg-rose-500/10 text-rose-400";
+                    stampIcon.className = "fa-solid fa-circle-xmark text-rose-400";
+                    stampText.textContent = "未及格 FAIL";
+                }
+
+                // Render Detailed Breakdown Review List
+                this.renderResultReview();
+            }
+
+            renderResultReview() {
+                const container = document.getElementById('result-review-list');
+                container.innerHTML = '';
+                const letters = ["A", "B", "C", "D"];
+
+                this.activeQuestions.forEach((q, idx) => {
+                    const userAns = this.userAnswers[q.id];
+                    const isCorrect = userAns === q.ans;
+
+                    if (this.resultReviewFilter === 'wrong' && isCorrect) return;
+
+                    const card = document.createElement('div');
+                    card.className = `bg-slate-800/80 rounded-xl p-5 border ${isCorrect ? 'border-slate-700/60' : 'border-rose-500/40 bg-rose-950/10'} space-y-3`;
+
+                    const optionsHTML = q.options.map((opt, oIdx) => {
+                        let optStyle = "text-slate-400";
+                        if (oIdx === q.ans) optStyle = "text-emerald-400 font-bold";
+                        if (userAns === oIdx && userAns !== q.ans) optStyle = "text-rose-400 font-bold line-through";
+                        return `<div class="text-xs sm:text-sm ${optStyle}">${letters[oIdx]}. ${opt}</div>`;
+                    }).join('');
+
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2 text-xs">
+                                    <span class="font-mono text-slate-400">#${idx + 1} (原題號 #${q.id})</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">
+                                        ${isCorrect ? '答對' : '答錯'}
+                                    </span>
+                                </div>
+                                <h4 class="font-semibold text-white text-sm sm:text-base leading-relaxed">${q.q}</h4>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-700/50">
+                            ${optionsHTML}
+                        </div>
+                        <div class="text-xs text-slate-400 pt-1 flex items-center justify-between">
+                            <span>您的答案: <strong class="${isCorrect ? 'text-emerald-400' : 'text-rose-400'}">${userAns !== undefined ? letters[userAns] : '未作答'}</strong></span>
+                            <span>標準答案: <strong class="text-emerald-400">${letters[q.ans]}</strong></span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            filterResultReview(type) {
+                this.resultReviewFilter = type;
+                document.getElementById('btn-filter-all').className = type === 'all' ? 'px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium' : 'px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700';
+                document.getElementById('btn-filter-wrong').className = type === 'wrong' ? 'px-3 py-1.5 rounded-lg bg-rose-600 text-white font-medium' : 'px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700';
+                this.renderResultReview();
+            }
+
+            // --- MATRIX MODAL LOGIC ---
+            openQuestionMatrix() {
+                const container = document.getElementById('matrix-grid-container');
+                container.innerHTML = '';
+
+                this.activeQuestions.forEach((q, idx) => {
+                    const btn = document.createElement('button');
+                    const userAnswer = this.userAnswers[q.id];
+                    const isCurrent = idx === this.currentIndex;
+                    const isFav = this.bookmarks.has(q.id);
+
+                    let bgClass = "bg-slate-700 text-slate-300 hover:bg-slate-600";
+                    if (userAnswer !== undefined) {
+                        if (this.mode === 'exam') {
+                            bgClass = "bg-emerald-600 text-white font-bold";
+                        } else {
+                            bgClass = userAnswer === q.ans ? "bg-emerald-600 text-white font-bold" : "bg-rose-600 text-white font-bold";
+                        }
+                    }
+
+                    if (isCurrent) {
+                        bgClass += " ring-2 ring-blue-400 border-2 border-white";
+                    }
+
+                    btn.className = `relative p-2.5 rounded-xl text-xs font-mono font-semibold transition flex items-center justify-center ${bgClass}`;
+                    btn.innerHTML = `
+                        ${idx + 1}
+                        ${isFav ? `<i class="fa-solid fa-star text-[9px] text-amber-400 absolute top-1 right-1"></i>` : ''}
+                    `;
+
+                    btn.onclick = () => {
+                        this.currentIndex = idx;
+                        this.renderQuestion();
+                        this.closeQuestionMatrix();
+                    };
+
+                    container.appendChild(btn);
+                });
+
+                document.getElementById('modal-matrix').classList.remove('hidden');
+            }
+
+            closeQuestionMatrix() {
+                document.getElementById('modal-matrix').classList.add('hidden');
+            }
+
+            // --- KEYBOARD SHORTCUTS ---
+            bindKeyboardShortcuts() {
+                window.addEventListener('keydown', (e) => {
+                    // Ignore shortcuts if typing in input
+                    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+                    const quizView = document.getElementById('view-quiz');
+                    if (quizView.classList.contains('hidden')) return;
+
+                    const key = e.key.toUpperCase();
+                    if (['A', '1'].includes(key)) this.selectOption(0);
+                    if (['B', '2'].includes(key)) this.selectOption(1);
+                    if (['C', '3'].includes(key)) this.selectOption(2);
+                    if (['D', '4'].includes(key)) this.selectOption(3);
+
+                    if (e.key === 'ArrowLeft') this.prevQuestion();
+                    if (e.key === 'ArrowRight') this.nextQuestion();
+                    if (key === 'S') this.toggleBookmarkCurrent();
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        this.toggleRevealAnswerManual();
+                    }
+                });
+            }
+
+            // --- CUSTOM MODAL DIALOGS ---
+            showCustomAlert(title, msg, onConfirm) {
+                const modal = document.getElementById('modal-dialog');
+                document.getElementById('dialog-title').textContent = title;
+                document.getElementById('dialog-msg').textContent = msg;
+
+                const confirmBtn = document.getElementById('dialog-confirm-btn');
+                const cancelBtn = document.getElementById('dialog-cancel-btn');
+
+                cancelBtn.classList.add('hidden');
+                confirmBtn.onclick = () => {
+                    modal.classList.add('hidden');
+                    if (onConfirm) onConfirm();
+                };
+
+                modal.classList.remove('hidden');
+            }
+
+            showCustomConfirm(title, msg, onConfirm) {
+                const modal = document.getElementById('modal-dialog');
+                document.getElementById('dialog-title').textContent = title;
+                document.getElementById('dialog-msg').textContent = msg;
+
+                const confirmBtn = document.getElementById('dialog-confirm-btn');
+                const cancelBtn = document.getElementById('dialog-cancel-btn');
+
+                cancelBtn.classList.remove('hidden');
+                cancelBtn.onclick = () => modal.classList.add('hidden');
+
+                confirmBtn.onclick = () => {
+                    modal.classList.add('hidden');
+                    if (onConfirm) onConfirm();
+                };
+
+                modal.classList.remove('hidden');
+            }
+
+            confirmResetData() {
+                this.showCustomConfirm(
+                    '清除所有紀錄？',
+                    '此操作將會重置您的最高分、順序刷題進度、所有收藏與錯題紀錄。確定要繼續嗎？',
+                    () => {
+                        localStorage.removeItem('crm_bookmarks');
+                        localStorage.removeItem('crm_wrong_records');
+                        localStorage.removeItem('crm_seq_index');
+                        localStorage.removeItem('crm_high_score');
+
+                        this.bookmarks.clear();
+                        this.wrongRecords = {};
+                        this.seqProgressIndex = 0;
+                        this.highScore = null;
+
+                        this.updateHeaderStats();
+                        this.showCustomAlert('已重置', '所有刷題紀錄已成功清除！');
+                    }
+                );
+            }
+        }
+
+        // Initialize App on Window Load
+        let app;
+        window.addEventListener('DOMContentLoaded', () => {
+            app = new CRMQuizApp();
+        });
+    </script>
+</body>
+</html>
